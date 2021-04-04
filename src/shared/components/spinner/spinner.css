@@ -1,0 +1,21 @@
+.lds-facebook div {
+  background: #3ab394 !important;
+  /* background: #2f4050 !important; */
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-icon {
+	font-size: 15px !important;
+	color: #3ab394 !important;
+}
