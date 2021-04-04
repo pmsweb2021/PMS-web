@@ -32,29 +32,6 @@ const App: React.FC = () => {
 				<Suspense fallback={<Spinner />}>
 					<Switch>
 						<Route exact path='/coustomer-detail' component={asyncComponents.CoustomerDetail} />
-
-
-						
-						<Route exact path='/events' component={asyncComponents.Events} />
-						<Route exact path='/event/:id' component={asyncComponents.EventDetail} />
-
-						<Route exact path='/payment' component={asyncComponents.Payment} />
-
-						<Route exact path='/' component={asyncComponents.MediaList} />
-						<Route exact path='/media/add' component={asyncComponents.MediaForm} />
-
-						<Route exact path='/poll' component={asyncComponents.PollList} />
-						<Route exact path='/poll/add' component={asyncComponents.PollForm} />
-
-						<Route exact path='/star-challenge' component={asyncComponents.StarChallenge} />
-						<Route exact path='/404' component={NotFound} />
-
-						{isSuperAdmin && (
-							<Switch>
-								<Route exact path='/users' component={asyncComponents.Users} />
-								<Redirect to='/events' />
-							</Switch>
-						)}
 						<Redirect to='/404' />
 					</Switch>
 				</Suspense>
