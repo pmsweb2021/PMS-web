@@ -8423,9 +8423,18 @@ body.md-skin {
     text-align: right;
     display: block;
   }
-  .navbar-static-side {
-    display: none;
+  // .navbar-static-side {
+  //   display: none;
+  // }
+
+  #wrapper {
+    display: flex;
   }
+
+  #page-wrapper {
+    margin: 0 !important;
+  }
+
   body:not(.mini-navbar) {
     -webkit-transition: background-color 500ms linear;
     -moz-transition: background-color 500ms linear;

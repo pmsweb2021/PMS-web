@@ -31,11 +31,9 @@ const getActiveClass = (currentPathStr: string, actualPathStr: string): string =
 };
 
 const icons: { [key: string]: string } = {
-	media: 'picture-o',
-	money: 'money',
 	users: 'users',
-	events: 'calendar',
-	poll: 'bar-chart'
+	building: 'building',
+	document: 'file-text',
 };
 
 const NavItem: React.FC<Props> = props => {

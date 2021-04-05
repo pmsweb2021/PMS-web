@@ -5,7 +5,6 @@ import { RouteComponentProps, Redirect, withRouter } from 'react-router-dom';
 import NavItem from './navItem';
 import { State, Action } from 'shared/interface';
 import { createAction } from 'shared/util/utility';
-import AuthService from 'shared/services/auth.service';
 import * as actionTypes from 'store/action-types';
 import * as ProfileActions from 'features/login/store/login.action';
 
@@ -26,8 +25,6 @@ class SideNav extends PureComponent<OwnProps> {
 	};
 
 	render() {
-		const isSuperAdmin = AuthService.checkSuperAdmin();
-
 		if (!this.props.auth.authData.auth) {
 			return <Redirect to='/login' />;
 		}
@@ -36,70 +33,32 @@ class SideNav extends PureComponent<OwnProps> {
 				<ul className='nav' id='side-menu'>
 					<li className='nav-header cursor-pointer'>
 						<h3 className='profile-element'>
-							STREAM BLAST
+							PMS Admin
 						</h3>
-						<span className='user-role-element text-muted text-xs block'>
-							{isSuperAdmin ? 'Super' : 'Event'} Admin
-						</span>
-						<div className='logo-element'>SB</div>
+						<div className='logo-element'>PMS</div>
 					</li>
-					
 
 					<NavItem
 						isOpen={this.state.openStatus.Events || false}
 						toggleIsOpen={this.toggleIsOpen}
 						key={'Customer-detail'}
 						renderSideNav={this.props.renderSideNav}
-						menu={{ name: 'Customer Detail', route: '/Customer-detail', icon: 'users' }}
+						menu={{ name: 'Customer Detail', route: '/customer-detail', icon: 'users' }}
 					/>
-
-
-
-					{/* <NavItem
+					<NavItem
 						isOpen={this.state.openStatus.Events || false}
 						toggleIsOpen={this.toggleIsOpen}
-						key={'Events'}
+						key={'Company-detail'}
 						renderSideNav={this.props.renderSideNav}
-						menu={{ name: 'Events', route: '/events', icon: 'events' }}
+						menu={{ name: 'Company Detail', route: '/company-detail', icon: 'building' }}
 					/>
 					<NavItem
-						isOpen={this.state.openStatus.Media || false}
+						isOpen={this.state.openStatus.Events || false}
 						toggleIsOpen={this.toggleIsOpen}
-						key={'Media'}
+						key={'Policy-detail'}
 						renderSideNav={this.props.renderSideNav}
-						menu={{ name: 'Media', route: '/', icon: 'media' }}
+						menu={{ name: 'Policy Detail', route: '/policy-detail', icon: 'document' }}
 					/>
-					<NavItem
-						isOpen={this.state.openStatus.Poll || false}
-						toggleIsOpen={this.toggleIsOpen}
-						key={'Poll'}
-						renderSideNav={this.props.renderSideNav}
-						menu={{ name: 'Poll', route: '/poll', icon: 'poll' }}
-					/>
-					<NavItem
-						isOpen={this.state.openStatus.Poll || false}
-						toggleIsOpen={this.toggleIsOpen}
-						key={'star-challenge'}
-						renderSideNav={this.props.renderSideNav}
-						menu={{ name: 'Star Challenge', route: '/star-challenge', icon: 'media' }}
-					/>
-
-					<NavItem
-						isOpen={this.state.openStatus.Payment || false}
-						toggleIsOpen={this.toggleIsOpen}
-						key={'Payment'}
-						renderSideNav={this.props.renderSideNav}
-						menu={{ name: 'Payment', route: '/payment', icon: 'money' }}
-					/>
-					{isSuperAdmin &&
-						<NavItem
-							isOpen={this.state.openStatus.Users || false}
-							toggleIsOpen={this.toggleIsOpen}
-							key={'Users'}
-							renderSideNav={this.props.renderSideNav}
-							menu={{ name: 'Users', route: '/users', icon: 'users' }}
-						/>
-					} */}
 				</ul>
 			</nav>
 		);

@@ -30,6 +30,8 @@ const App: React.FC = () => {
 				<Suspense fallback={<Spinner />}>
 					<Switch>
 						<Route exact path='/customer-detail' component={asyncComponents.CustomerDetail} />
+						<Route exact path='/company-detail' component={asyncComponents.CompanyDetail} />
+						<Route exact path='/policy-detail' component={asyncComponents.PolicyDetail} />
 						<Redirect to='/404' />
 					</Switch>
 				</Suspense>
