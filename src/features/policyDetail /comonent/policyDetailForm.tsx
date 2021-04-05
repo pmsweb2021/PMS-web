@@ -3,7 +3,7 @@ import { ErrorMessage, Formik } from 'formik';
 import * as Yup from 'yup';
 import Button from 'shared/components/form/button';
 import FieldErrorMessage from 'shared/components/form/error';
-import { Input } from 'shared/components/form/inputTypes';
+import { Input, InputDatePicker } from 'shared/components/form/inputTypes';
 import Spinner from 'shared/components/spinner/spinner';
 import { errorMessages } from 'shared/constants/messages';
 
@@ -12,18 +12,34 @@ interface Props {
     handlesubmit: (initialValues: any) => void;
 }
 
+const DropDownOptions = [
+	{ name: 'ONE', value: 'ONE' },
+	{ name: 'TWO', value: 'TWO' },
+	{ name: 'THREE', value: 'THREE' },
+	{ name: 'FOUR', value: 'FOUR' },
+];
+
 const PolicyDetailForm: React.FC<Props> = (props) => {
     const initialValues = {
-        PolicyName: '',
-        PolicyOccupation: '',
-        PolicyAdd1: '',
-        UKAddress1: '',
-        PolicyAdd2: '',
-        UKAddress2: '',
-        PolicyAdd3: '',
-        UKAddress3: '',
-        PolicyAdd4: '',
-        UKAddress4: '',
+        status : '',
+        referenceNumber: '',
+        companyName: '',
+        contactPerson: '',
+        quoteType: '',
+        policyType: '',
+        quoteDate: '',
+        acceptedDate: '',
+        proposedInceptionDate: '',
+        policyStartDate: '',
+        paymentMethod: '',
+        proposedEndDate: '',
+        brokerInformation:'',
+        brokgType: '',
+        brokerage: '',
+        SAPno: '',
+        insYear: '',
+        govLevy: '',
+        notes: '',
     };
     
     return (
@@ -39,19 +55,174 @@ const PolicyDetailForm: React.FC<Props> = (props) => {
 								<Spinner />
 							</div>}
 
-                            {INPUTFIELDS.map((inputItem: any) => (
+                            <div className='form-group col-xs-12 col-sm-12 col-md-6'>
+                                <Input
+                                    type='text'
+                                    name='status'
+                                    placeholder='Quote'
+                                    showLabels
+                                    setFieldValue={setFieldValue}
+                                    config={{ type: 'text', label: 'Status', name: 'status'}}
+                                />
+                                <ErrorMessage name={`mediaContent.status`} component={FieldErrorMessage} />
+                            </div>
+
+                            <div className='form-group col-xs-12 col-sm-12 col-md-6'>
+                                <Input
+                                    type='text'
+                                    name='referenceNumber'
+                                    placeholder='Reference Number'
+                                    showLabels
+                                    setFieldValue={setFieldValue}
+                                    config={{ type: 'text', label: 'Reference Number', name: 'referenceNumber'}}
+                                />
+                                <ErrorMessage name={`mediaContent.referenceNumber`} component={FieldErrorMessage} />
+                            </div>
+
+                            <div className='form-group col-xs-12 col-sm-12 col-md-6'>
+                                <Input
+                                    type='dropdown'
+                                    name='companyName'
+                                    placeholder='Company Name'
+                                    showLabels
+                                    setFieldValue={setFieldValue}
+                                    config={{ type: 'dropdown', label: 'Company Name', name: 'companyName', otherOptions: { dropDownOptions: DropDownOptions } }}
+                                />
+                            </div>
+
+                            <div className='form-group col-xs-12 col-sm-12 col-md-6'>
+                                <Input
+                                    type='dropdown'
+                                    name='contactPerson'
+                                    placeholder='Contact Person'
+                                    showLabels
+                                    setFieldValue={setFieldValue}
+                                    config={{ type: 'dropdown', label: 'Contact Person', name: 'contactPerson', otherOptions: { dropDownOptions: DropDownOptions } }}
+                                />
+                            </div>
+
+                            <div className='form-group col-xs-12 col-sm-12 col-md-6'>
+                                <Input
+                                    type='text'
+                                    name='quoteType'
+                                    placeholder='Quote Type'
+                                    showLabels
+                                    setFieldValue={setFieldValue}
+                                    config={{ type: 'text', label: 'Quote Type', name: 'quoteType'}}
+                                />
+                                <ErrorMessage name={`mediaContent.quoteType`} component={FieldErrorMessage} />
+                            </div>
+
+                            <div className='form-group col-xs-12 col-sm-12 col-md-6'>
+                                <Input
+                                    type='text'
+                                    name='policyType'
+                                    placeholder='Policy Type'
+                                    showLabels
+                                    setFieldValue={setFieldValue}
+                                    config={{ type: 'text', label: 'Policy Type', name: 'policyType'}}
+                                />
+                                <ErrorMessage name={`mediaContent.policyType`} component={FieldErrorMessage} />
+                            </div>
+
+                            {DATEPICKERS.map((inputItem) => (
                                 <div className='form-group col-xs-12 col-sm-12 col-md-6' key={inputItem.key}>
-                                    <Input
-                                        type={inputItem.type}
-                                        name={inputItem.key}
-                                        placeholder={inputItem.placeHolder}
-                                        showLabels
+                                    <InputDatePicker
                                         setFieldValue={setFieldValue}
-                                        config={{ type: inputItem.type, label: inputItem.placeHolder, name: inputItem.key }}
+                                        minDate={new Date()}
+                                        label={inputItem.placeHolder}
+                                        name={inputItem.key}
+                                        dateFormat={'MM-dd-yyyy'}
+                                        onChange={(date: Date | null) => {
+                                            setFieldValue(inputItem.key, date);
+                                        }}
+                                        placeHolder={inputItem.placeHolder}
                                     />
-    								<ErrorMessage name={`mediaContent.${inputItem.key}`} component={FieldErrorMessage} />
                                 </div>
                             ))}
+
+                            <div className='form-group col-xs-12 col-sm-12 col-md-6'>
+                                <Input
+                                    type='dropdown'
+                                    name='paymentMethod'
+                                    placeholder='Payment Method'
+                                    showLabels
+                                    setFieldValue={setFieldValue}
+                                    config={{ type: 'dropdown', label: 'Payment Method', name: 'paymentMethod', otherOptions: { dropDownOptions: DropDownOptions } }}
+                                />
+                            </div>
+
+                            <div className='form-group col-xs-12 col-sm-12 col-md-6'>
+                                <Input
+                                    type='dropdown'
+                                    name='brokerInformation'
+                                    placeholder='Broker Information'
+                                    showLabels
+                                    setFieldValue={setFieldValue}
+                                    config={{ type: 'dropdown', label: 'Broker Information', name: 'brokerInformation', otherOptions: { dropDownOptions: DropDownOptions } }}
+                                />
+                            </div>
+
+                            <div className='form-group col-xs-12 col-sm-12 col-md-6'>
+                                <Input
+                                    type='dropdown'
+                                    name='brokgType'
+                                    placeholder='Breokg. Type'
+                                    showLabels
+                                    setFieldValue={setFieldValue}
+                                    config={{ type: 'dropdown', label: 'Brokg. Type', name: 'brokgType', otherOptions: { dropDownOptions: DropDownOptions } }}
+                                />
+                            </div>
+
+                            <div className='form-group col-xs-12 col-sm-12 col-md-6'>
+                                <Input
+                                    type='text'
+                                    name='brokerage'
+                                    placeholder='Brokerage'
+                                    showLabels
+                                    setFieldValue={setFieldValue}
+                                    config={{ type: 'number', label: 'Brokerage', name: 'brokerage'}}
+                                />
+                                <ErrorMessage name={`mediaContent.brokerage`} component={FieldErrorMessage} />
+                            </div>
+
+                            <div className='form-group col-xs-12 col-sm-12 col-md-6'>
+                                <Input
+                                    type='number'
+                                    name='SAPno'
+                                    placeholder='SAP no'
+                                    showLabels
+                                    setFieldValue={setFieldValue}
+                                    config={{ type: 'number', label: 'SAP no', name: 'SAPno'}}
+                                />
+                                <ErrorMessage name={`mediaContent.brokerage`} component={FieldErrorMessage} />
+                            </div>
+
+                            <div className='form-group col-xs-12 col-sm-12 col-md-6'>
+                                <Input
+                                    type='number'
+                                    name='insYear'
+                                    placeholder='Brokerage'
+                                    showLabels
+                                    setFieldValue={setFieldValue}
+                                    config={{ type: 'number', label: 'Brokerage', name: 'brokerage'}}
+                                />
+                                <ErrorMessage name={`mediaContent.brokerage`} component={FieldErrorMessage} />
+                            </div>
+
+                            <div className='form-group col-xs-12 col-sm-12 col-md-6'>
+                                <Input
+                                    type='number'
+                                    name='govLevy'
+                                    placeholder='Brokerage'
+                                    showLabels
+                                    setFieldValue={setFieldValue}
+                                    config={{ type: 'number', label: 'Gov. Levy', name: 'govLevy'}}
+                                />
+                                <ErrorMessage name={`mediaContent.brokerage`} component={FieldErrorMessage} />
+                            </div>
+
+
 
 							<div className='col-xs-12 col-sm-12 col-md-12 mt-5'>
 								<Button className='' type='submit' disabled={props.loading} btnType='primary'>Add Policy Detail</Button>
@@ -64,29 +235,33 @@ const PolicyDetailForm: React.FC<Props> = (props) => {
 }
 
 const formValidation = Yup.object().shape({
-    PolicyName: Yup.string().required(errorMessages.required('PolicyName')).strict(true),
-    PolicyOccupation: Yup.string().required(errorMessages.required('PolicyOccupation')).strict(true),
-    PolicyAdd1: Yup.string().required(errorMessages.required('PolicyAdd1')).strict(true),
-    UKAddress1: Yup.string().required(errorMessages.required('UKAddress1')).strict(true),
-    PolicyAdd2: Yup.string().required(errorMessages.required('PolicyAdd2')).strict(true),
-    UKAddress2: Yup.string().required(errorMessages.required('UKAddress2')).strict(true),
-    PolicyAdd3: Yup.string().required(errorMessages.required('PolicyAdd3')).strict(true),
-    UKAddress3: Yup.string().required(errorMessages.required('UKAddress3')).strict(true),
-    PolicyAdd4: Yup.string().required(errorMessages.required('PolicyAdd4')).strict(true),
-    UKAddress4: Yup.string().required(errorMessages.required('UKAddress4')).strict(true),
+    status: Yup.string().required(errorMessages.required('status')).strict(true),
+    referenceNumber: Yup.string().required(errorMessages.required('referenceNumber')).strict(true),
+    companyName: Yup.string().required(errorMessages.required('companyName')).strict(true),
+    contactPerson: Yup.string().required(errorMessages.required('contactPerson')).strict(true),
+    quoteType: Yup.string().required(errorMessages.required('quoteType')).strict(true),
+    policyType: Yup.string().required(errorMessages.required('policyType')).strict(true),
+    quoteDate: Yup.string().required(errorMessages.required('quoteDate')).strict(true),
+    acceptedDate: Yup.string().required(errorMessages.required('acceptedDate')).strict(true),
+    proposedInceptionDate: Yup.string().required(errorMessages.required('proposedInceptionDate')).strict(true),
+    policyStartDate: Yup.string().required(errorMessages.required('policyStartDate')).strict(true),
+    paymentMethod: Yup.string().required(errorMessages.required('paymentMethod')).strict(true),
+    proposedEndDate: Yup.string().required(errorMessages.required('proposedEndDate')).strict(true),
+    brokerInformation: Yup.string().required(errorMessages.required('brokerInformation')).strict(true),
+    brokgType: Yup.string().required(errorMessages.required('brokgType')).strict(true),
+    brokerage: Yup.number().required(errorMessages.required('brokerage')).strict(true),
+    SAPno: Yup.number().required(errorMessages.required('SAPno')).strict(true),
+    insYear: Yup.number().required(errorMessages.required('insYear')).strict(true),
+    govLevy: Yup.number().required(errorMessages.required('govLevy')).strict(true),
+    notes: Yup.string().required(errorMessages.required('notes')).strict(true),
 })
 
 export default PolicyDetailForm;
 
-const INPUTFIELDS = [ 
-    { key: 'PolicyName', type: 'text', placeHolder: 'Policy Name' }, 
-    { key: 'PolicyOccupation', type: 'text', placeHolder: 'Policy Occupation' }, 
-    { key: 'PolicyAdd1', type: 'text', placeHolder: 'Policy Address 1' }, 
-    { key: 'UKAddress1', type: 'text', placeHolder: 'UK Address 1' },
-    { key: 'PolicyAdd2', type: 'text', placeHolder: 'Policy Address 2' }, 
-    { key: 'UKAddress2', type: 'text', placeHolder: 'UK Address 2' },
-    { key: 'PolicyAdd3', type: 'text', placeHolder: 'Policy Address 3' }, 
-    { key: 'UKAddress3', type: 'text', placeHolder: 'UK Address 3' },
-    { key: 'PolicyAdd4', type: 'text', placeHolder: 'Policy Address 4' }, 
-    { key: 'UKAddress4', type: 'text', placeHolder: 'UK Address 4' }, 
+const DATEPICKERS = [ 
+    { key: 'quoteDate',  placeHolder: 'Quote Date' }, 
+    { key: 'acceptedDate',  placeHolder: 'Accepted Date' }, 
+    { key: 'proposedInceptionDate',  placeHolder: 'proposedInceptionDate' }, 
+    { key: 'policyStartDate',  placeHolder: 'Policy start date' },
+    { key: 'proposedEndDate',  placeHolder: 'proposed End date' },
 ]
