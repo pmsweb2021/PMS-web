@@ -13,7 +13,6 @@ import AuthService from 'shared/services/auth.service';
 import Spinner from 'shared/components/spinner/spinner';
 
 // import containers, for which lazy loading is not needed, as they will be rendered for all users
-import NotFound from 'shared/components/404/404';
 import Login from 'features/login/container/login.container';
 
 /*
@@ -24,7 +23,6 @@ import * as asyncComponents from 'shared/hoc/asyncComponents';
 
 const App: React.FC = () => {
 	const isLoggedIn = AuthService.checkLogin();
-	const isSuperAdmin = AuthService.checkSuperAdmin();
 
 	if (isLoggedIn) {
 		return (

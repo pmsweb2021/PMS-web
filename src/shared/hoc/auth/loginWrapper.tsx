@@ -36,7 +36,7 @@ const LoginWrapper: React.FC<{ className?: string } & RouteComponentProps> = (pr
 						</svg>
 					</div>
 					<br/>
-					{/* <h1 className='logo-name'>Streamblast</h1> */}
+					{/* <h1 className='logo-name'>PMS</h1> */}
 					{props.children}
 				</div>
 			</div>

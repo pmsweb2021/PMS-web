@@ -1,4 +1,4 @@
-# Streamblast Admin
+# PMS Admin
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -28,7 +28,7 @@ This project is setup to lint code before commiting and will not allow you to co
 ## Folder structure
 
 ```
-streamblast-admin
+PMS-admin
 └───src
 │   │   file011.txt
 │   │   file012.txt
