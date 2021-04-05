@@ -1,8 +1,8 @@
 import { lazy } from 'react';
 import { withRouter } from 'react-router';
 
-const CoustomerDetail = withRouter(lazy(() => import('features/coustomerDetail/container/coustomerDetail')));
+const CustomerDetail = withRouter(lazy(() => import('features/customerDetail/container/customerDetail')));
 
 export {
-	CoustomerDetail,
+	CustomerDetail,
 };

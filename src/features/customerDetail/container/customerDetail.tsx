@@ -4,9 +4,9 @@ import { RouteComponentProps, withRouter } from 'react-router';
 import { TableTitle } from 'shared/components/table';
 import { firstLevelBreadcrumbs } from 'shared/constants/constants';
 import Header from 'shared/components/header/header';
-import CoustomerDetailForm from '../comonent/coustmerDetailForm';
+import CustomerDetailForm from '../comonent/customerDetailForm';
 
-class CoustomerDetail extends Component<RouteComponentProps> {
+class CustomerDetail extends Component<RouteComponentProps> {
     state = {
         loading: false,
     }
@@ -14,13 +14,13 @@ class CoustomerDetail extends Component<RouteComponentProps> {
     render () {
         return (
             <>
-                <Header data={firstLevelBreadcrumbs} title='Add Coustomer Detail' />
+                <Header data={firstLevelBreadcrumbs} title='Add Customer Detail' />
 				<div className='row mt-3'>
 					<div className='col-lg-12'>
 						<div className='ibox float-e-margins'>
-							<TableTitle title={`Add Coustomer detail`} className='text-capitalize' />
+							<TableTitle title={`Add Customer detail`} className='text-capitalize' />
 							<div className='ibox-content'>
-                                <CoustomerDetailForm
+                                <CustomerDetailForm
                                     loading={this.state.loading}
                                     handlesubmit={this.handleSubmit}
                                 />
@@ -38,4 +38,4 @@ class CoustomerDetail extends Component<RouteComponentProps> {
     }
 }
 
-export default withRouter(CoustomerDetail);
+export default withRouter(CustomerDetail);

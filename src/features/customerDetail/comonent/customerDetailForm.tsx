@@ -18,7 +18,7 @@ const DropDownOptions = [
 ];
 
 
-const CoustomerDetailForm: React.FC<Props> = (props) => {
+const CustomerDetailForm: React.FC<Props> = (props) => {
     const initialValues = {
         companyId: '',
         contactTitle: '',
@@ -135,7 +135,7 @@ const CoustomerDetailForm: React.FC<Props> = (props) => {
                             </div>
 							
 							<div className='col-xs-12 col-sm-12 col-md-12 mt-5'>
-								<Button className='' type='submit' disabled={props.loading} btnType='primary'>Add Coustomer Detail</Button>
+								<Button className='' type='submit' disabled={props.loading} btnType='primary'>Add Customer Detail</Button>
 							</div>
 						</fieldset>
 					</form>
@@ -161,7 +161,7 @@ const formValidation = Yup.object().shape({
         .required(errorMessages.required('Email Address')),
 })
 
-export default CoustomerDetailForm;
+export default CustomerDetailForm;
 
 const INPUTFIELDS = [ 
     { key: 'contactTitle', type: 'text', placeHolder: 'Contact Title' }, 
