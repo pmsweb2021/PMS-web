@@ -176,7 +176,7 @@ const PolicyDetailForm: React.FC<Props> = (props) => {
 
                             <div className='form-group col-xs-12 col-sm-12 col-md-6'>
                                 <Input
-                                    type='text'
+                                    type='number'
                                     name='brokerage'
                                     placeholder='Brokerage'
                                     showLabels
@@ -202,19 +202,19 @@ const PolicyDetailForm: React.FC<Props> = (props) => {
                                 <Input
                                     type='number'
                                     name='insYear'
-                                    placeholder='Brokerage'
+                                    placeholder='ins. Year'
                                     showLabels
                                     setFieldValue={setFieldValue}
-                                    config={{ type: 'number', label: 'Brokerage', name: 'brokerage'}}
+                                    config={{ type: 'number', label: 'ins. Year', name: 'insYear'}}
                                 />
-                                <ErrorMessage name={`mediaContent.brokerage`} component={FieldErrorMessage} />
+                                <ErrorMessage name={`mediaContent.insYear`} component={FieldErrorMessage} />
                             </div>
-
+                            
                             <div className='form-group col-xs-12 col-sm-12 col-md-6'>
                                 <Input
                                     type='number'
                                     name='govLevy'
-                                    placeholder='Brokerage'
+                                    placeholder='Gov. Levy'
                                     showLabels
                                     setFieldValue={setFieldValue}
                                     config={{ type: 'number', label: 'Gov. Levy', name: 'govLevy'}}
@@ -222,7 +222,16 @@ const PolicyDetailForm: React.FC<Props> = (props) => {
                                 <ErrorMessage name={`mediaContent.brokerage`} component={FieldErrorMessage} />
                             </div>
 
-
+                            <div className='form-group col-xs-12 col-sm-12 col-md-12'>
+								<Input
+									type='textarea'
+									name={'notes'}
+									placeholder={'Notes'}
+									showLabels
+									setFieldValue={setFieldValue}
+									config={{ type: 'text', label: 'Notes', name: 'notes' }}
+								/>
+							</div>
 
 							<div className='col-xs-12 col-sm-12 col-md-12 mt-5'>
 								<Button className='' type='submit' disabled={props.loading} btnType='primary'>Add Policy Detail</Button>
@@ -241,12 +250,12 @@ const formValidation = Yup.object().shape({
     contactPerson: Yup.string().required(errorMessages.required('contactPerson')).strict(true),
     quoteType: Yup.string().required(errorMessages.required('quoteType')).strict(true),
     policyType: Yup.string().required(errorMessages.required('policyType')).strict(true),
-    quoteDate: Yup.string().required(errorMessages.required('quoteDate')).strict(true),
-    acceptedDate: Yup.string().required(errorMessages.required('acceptedDate')).strict(true),
-    proposedInceptionDate: Yup.string().required(errorMessages.required('proposedInceptionDate')).strict(true),
-    policyStartDate: Yup.string().required(errorMessages.required('policyStartDate')).strict(true),
+    quoteDate: Yup.date().required(errorMessages.required('quoteDate')).strict(true),
+    acceptedDate: Yup.date().required(errorMessages.required('acceptedDate')).strict(true),
+    proposedInceptionDate: Yup.date().required(errorMessages.required('proposedInceptionDate')).strict(true),
+    policyStartDate: Yup.date().required(errorMessages.required('policyStartDate')).strict(true),
     paymentMethod: Yup.string().required(errorMessages.required('paymentMethod')).strict(true),
-    proposedEndDate: Yup.string().required(errorMessages.required('proposedEndDate')).strict(true),
+    proposedEndDate: Yup.date().required(errorMessages.required('proposedEndDate')).strict(true),
     brokerInformation: Yup.string().required(errorMessages.required('brokerInformation')).strict(true),
     brokgType: Yup.string().required(errorMessages.required('brokgType')).strict(true),
     brokerage: Yup.number().required(errorMessages.required('brokerage')).strict(true),
