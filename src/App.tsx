@@ -31,7 +31,7 @@ const App: React.FC = () => {
 					<Route exact path='/customer-detail' component={asyncComponents.CustomerDetail} />
 					<Route exact path='/company-detail' component={asyncComponents.CompanyDetail} />
 					<Route exact path='/policy-detail' component={asyncComponents.PolicyDetail} />
-					<Redirect to='/404' />
+					<Redirect to='/customer-detail' />
 				</Switch>
 			</Suspense>
 		</Layout>

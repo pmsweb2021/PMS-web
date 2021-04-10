@@ -21,12 +21,19 @@ class TopHeader extends React.Component<RouteComponentProps & MapStateProps & Di
 	state: UIState = {
 		isOpen: false
 	};
+	
+	componentDidMount () {
+		if (window.innerWidth <= 768) {
+			document.body && document.body.classList.add('mini-navbar')
+		}
+	}
 	render() {
 		console.log();
+
 		
-		if (!this.props.authData.auth) {
-			return <Redirect to='/login' />
-		}
+		// if (!this.props.authData.auth) {
+		// 	return <Redirect to='/login' />
+		// }
 		return (
 			<div className='row border-bottom'>
 				<nav
@@ -37,14 +44,14 @@ class TopHeader extends React.Component<RouteComponentProps & MapStateProps & Di
 							className='navbar-minimalize minimalize-styl-2 btn btn-primary'
 							onClick={this.toggleSidebar} ><i className='fa fa-bars' /></button>
 					</div>
-					<ul className='nav navbar-top-links navbar-right'>
+					{/* <ul className='nav navbar-top-links navbar-right'>
 						<li>
 							<div className='logout-btn' onClick={this.toggleModalStatus}>
 								<i className='fa fa-sign-out' />
 								Logout
 							</div>
 						</li>
-					</ul>
+					</ul> */}
 				</nav>
 				{this.state.isOpen &&
 					<Confirm
