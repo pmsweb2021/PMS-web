@@ -23,6 +23,7 @@ import * as asyncComponents from 'shared/hoc/asyncComponents';
 
 const App: React.FC = () => {
 	// const isLoggedIn = AuthService.checkLogin();
+	localStorage.setItem('authData', 'true');
 	return (
 		<Layout>
 			<Suspense fallback={<Spinner />}>

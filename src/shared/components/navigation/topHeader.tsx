@@ -22,6 +22,8 @@ class TopHeader extends React.Component<RouteComponentProps & MapStateProps & Di
 		isOpen: false
 	};
 	render() {
+		console.log();
+		
 		if (!this.props.authData.auth) {
 			return <Redirect to='/login' />
 		}
