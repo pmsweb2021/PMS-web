@@ -21,16 +21,13 @@ class TopHeader extends React.Component<RouteComponentProps & MapStateProps & Di
 	state: UIState = {
 		isOpen: false
 	};
-	
+
 	componentDidMount () {
 		if (window.innerWidth <= 768) {
 			document.body && document.body.classList.add('mini-navbar')
 		}
 	}
 	render() {
-		console.log();
-
-		
 		// if (!this.props.authData.auth) {
 		// 	return <Redirect to='/login' />
 		// }

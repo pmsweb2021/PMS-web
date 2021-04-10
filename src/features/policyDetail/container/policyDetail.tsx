@@ -4,7 +4,7 @@ import { RouteComponentProps, withRouter } from 'react-router';
 import { TableTitle } from 'shared/components/table';
 import { firstLevelBreadcrumbs } from 'shared/constants/constants';
 import Header from 'shared/components/header/header';
-import PolicyDetailForm from '../comonent/policyDetailForm';
+import PolicyDetailForm from '../component/policyDetailForm';
 
 class PolicyDetail extends Component<RouteComponentProps> {
     state = {
