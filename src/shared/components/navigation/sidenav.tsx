@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
-import { RouteComponentProps, Redirect, withRouter } from 'react-router-dom';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import NavItem from './navItem';
 import { State, Action } from 'shared/interface';
 import { createAction } from 'shared/util/utility';

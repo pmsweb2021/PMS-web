@@ -1,7 +1,7 @@
 import React from 'react';
 import { ThunkDispatch } from 'redux-thunk';
 import { connect } from 'react-redux';
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import * as LoginActions from 'features/login/store/login.action';
 import { AuthState, State, Action, LoaderState } from 'shared/interface';

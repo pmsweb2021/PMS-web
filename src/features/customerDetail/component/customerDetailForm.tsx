@@ -9,7 +9,8 @@ import { errorMessages } from 'shared/constants/messages';
 
 interface Props {
     loading: boolean
-    handlesubmit: (initialValues: any) => void;
+    handleSubmit: (initialValues: any) => void;
+    handelReset: () => void;
 }
 
 const DropDownOptions = [
@@ -33,13 +34,13 @@ const CustomerDetailForm: React.FC<Props> = (props) => {
         optOutOfPostalContact: false,
         optOutOfPhoneFax: false,
         optOutOfEmailsSMS: false,
-        consentToUpadateNFD: false,
+        consentToUpdateNFD: false,
     };
     
     return (
         <Formik
 				initialValues={initialValues}
-				onSubmit={(initialValues) => props.handlesubmit(initialValues)}
+				onSubmit={(initialValues) => props.handleSubmit(initialValues)}
 				validationSchema={formValidation}
 			>
 				{({ handleSubmit, setFieldValue, values}) => (
@@ -121,21 +122,31 @@ const CustomerDetailForm: React.FC<Props> = (props) => {
 
                             <div className='form-group col-xs-12 col-sm-6 col-md-3'>
                                 <div className='checkbox-content'>
-                                    <label className='text-capitalize input-label-wrapper d-block   full-width'>consentToUpadateNFD</label>
+                                    <label className='text-capitalize input-label-wrapper d-block   full-width'>consentToUpdateNFD</label>
                                     <label className='switch no-margins' >
                                         <input
                                             placeholder={'switch'}
                                             type='checkbox'
-                                            onChange={() => setFieldValue('consentToUpadateNFD',!values.consentToUpadateNFD)}
+                                            onChange={() => setFieldValue('consentToUpdateNFD',!values.consentToUpdateNFD)}
                                         />
                                         <small />
                                     </label>
                                 </div>
-                                <ErrorMessage name='mediaContent.consentToUpadateNFD' component={FieldErrorMessage} />
+                                <ErrorMessage name='mediaContent.consentToUpdateNFD' component={FieldErrorMessage} />
                             </div>
 							
 							<div className='col-xs-12 col-sm-12 col-md-12 mt-5'>
 								<Button className='' type='submit' disabled={props.loading} btnType='primary'>Add Customer Detail</Button>
+
+                                <Button
+                                    className='ml-20'
+                                    type='button'
+                                    disabled={props.loading}
+                                    btnType='danger'
+                                    onClick={props.handelReset}
+                                >
+                                    Cancel
+                                </Button>
 							</div>
 						</fieldset>
 					</form>

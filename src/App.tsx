@@ -13,7 +13,7 @@ import Layout from 'shared/hoc/layout/component/layout.component';
 import Spinner from 'shared/components/spinner/spinner';
 
 // import containers, for which lazy loading is not needed, as they will be rendered for all users
-import Login from 'features/login/container/login.container';
+// import Login from 'features/login/container/login.container';
 
 /*
 * import async components in order to lazy load the containers, which will be rendered conditionally
