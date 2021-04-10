@@ -25,9 +25,9 @@ class SideNav extends PureComponent<OwnProps> {
 	};
 
 	render() {
-		if (!this.props.auth.authData.auth) {
-			return <Redirect to='/login' />;
-		}
+		// if (!this.props.auth.authData.auth) {
+		// 	return <Redirect to='/login' />;
+		// }
 		return (
 			<nav className='navbar-default navbar-static-side' role='navigation'>
 				<ul className='nav' id='side-menu'>

@@ -9,7 +9,7 @@ import 'assets/styles/datatables.min.css';
 import './assets/styles/index.scss';
 
 import Layout from 'shared/hoc/layout/component/layout.component';
-import AuthService from 'shared/services/auth.service';
+// import AuthService from 'shared/services/auth.service';
 import Spinner from 'shared/components/spinner/spinner';
 
 // import containers, for which lazy loading is not needed, as they will be rendered for all users
@@ -22,30 +22,42 @@ import Login from 'features/login/container/login.container';
 import * as asyncComponents from 'shared/hoc/asyncComponents';
 
 const App: React.FC = () => {
-	const isLoggedIn = AuthService.checkLogin();
+	// const isLoggedIn = AuthService.checkLogin();
+	return (
+		<Layout>
+			<Suspense fallback={<Spinner />}>
+				<Switch>
+					<Route exact path='/customer-detail' component={asyncComponents.CustomerDetail} />
+					<Route exact path='/company-detail' component={asyncComponents.CompanyDetail} />
+					<Route exact path='/policy-detail' component={asyncComponents.PolicyDetail} />
+					<Redirect to='/404' />
+				</Switch>
+			</Suspense>
+		</Layout>
+	)
 
-	if (isLoggedIn) {
-		return (
-			<Layout>
-				<Suspense fallback={<Spinner />}>
-					<Switch>
-						<Route exact path='/customer-detail' component={asyncComponents.CustomerDetail} />
-						<Route exact path='/company-detail' component={asyncComponents.CompanyDetail} />
-						<Route exact path='/policy-detail' component={asyncComponents.PolicyDetail} />
-						<Redirect to='/404' />
-					</Switch>
-				</Suspense>
-			</Layout>
-		);
-	} else {
-		// lazy loading not needed for login, forget password, reset password APIs
-		return (
-			<Switch>
-				<Route path='/login' component={Login} />
-				<Redirect to='/login' />
-			</Switch>
-		);
-	}
+	// if (isLoggedIn) {
+	// 	return (
+	// 		<Layout>
+	// 			<Suspense fallback={<Spinner />}>
+	// 				<Switch>
+	// 					<Route exact path='/customer-detail' component={asyncComponents.CustomerDetail} />
+	// 					<Route exact path='/company-detail' component={asyncComponents.CompanyDetail} />
+	// 					<Route exact path='/policy-detail' component={asyncComponents.PolicyDetail} />
+	// 					<Redirect to='/404' />
+	// 				</Switch>
+	// 			</Suspense>
+	// 		</Layout>
+	// 	);
+	// } else {
+	// 	// lazy loading not needed for login, forget password, reset password APIs
+	// 	return (
+	// 		<Switch>
+	// 			<Route path='/login' component={Login} />
+	// 			<Redirect to='/login' />
+	// 		</Switch>
+	// 	);
+	// }
 };
 
 export default App;
