@@ -1369,6 +1369,17 @@ body.mini-navbar .navbar-default .nav li {
 	margin: 0 !important;
 }
 
+.card {
+	margin-top: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px 3px #f1f1f1cf;
+
+	.font-bold {
+		margin-right: 5px;
+	}
+}
+
 .logout-btn {
 	display: block;
 	font-size: 14px;

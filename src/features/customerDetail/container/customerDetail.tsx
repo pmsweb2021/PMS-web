@@ -8,7 +8,7 @@ import CustomerDetailForm from '../component/customerDetailForm';
 import CustomerDetailList from '../component/customerDetailList';
 import Button from 'shared/components/form/button';
 import Modal from 'shared/components/modal/modal';
-import CustomerDetailModel from '../component/customerDetailModel';
+import CustomerDetailModal from '../component/customerDetailModal';
 
 
 interface UIState {
@@ -71,7 +71,7 @@ class CustomerDetail extends Component<RouteComponentProps> {
                                         modalTitle='Customer Detail'
                                         handleClose={this.handleCloseModel}
                                     >
-                                        <CustomerDetailModel
+                                        <CustomerDetailModal
                                             customerDetail ={customerDetailList[selectedCustomer]}
                                         />
                                     </Modal>

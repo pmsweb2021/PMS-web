@@ -4,8 +4,8 @@ interface Props {
     customerDetail: any;
 }
 
-const CustomerDetailModel: React .FC<Props> = (props) => (
-    <div className='d-flex'>
+const CustomerDetailModal: React .FC<Props> = (props) => (
+    <div className='row'>
         <div className='col-xs-12 col-sm-12 col-md-12 col-lg-6'>
             <p>Company ID -  <b>{props.customerDetail.companyId}</b></p>
             <p>First Name -  <b>{props.customerDetail.firstName}</b></p>
@@ -31,4 +31,4 @@ const CustomerDetailModel: React .FC<Props> = (props) => (
     </div>    
 )
 
-export default CustomerDetailModel;
+export default CustomerDetailModal;
