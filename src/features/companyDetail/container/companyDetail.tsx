@@ -34,11 +34,11 @@ class CompanyDetail extends Component<RouteComponentProps> {
         const { loading, addDetail, companyDetailList, isModalOpen, actionType, selectedCompany } = this.state
         return (
             <>
-                <Header data={firstLevelBreadcrumbs} title={`${addDetail ? 'Add Company detail' : 'Company Detail List' }`}>
+                <Header data={firstLevelBreadcrumbs} title={`${addDetail ? 'Add Company' : 'Company Detail List' }`}>
                 {!addDetail &&
                         <div className='breadcrumb-btn'>
                             <Button className='mr-2' btnType='primary' onClick={() => this.setState({ addDetail: true })}>
-                                Add Company Detail
+                                Add Company
                             </Button>
                         </div>
                     }
@@ -46,12 +46,13 @@ class CompanyDetail extends Component<RouteComponentProps> {
 				<div className='row mt-3'>
 					<div className='col-lg-12'>
 						<div className='ibox float-e-margins'>
-							<TableTitle title={`Add Company detail`} className='text-capitalize' />
+							<TableTitle title={`${addDetail ? 'Add Company' : 'Company Details'}`} className='text-capitalize' />
 							<div className='ibox-content'>
                                 {addDetail && 
                                     <CompanyDetailForm
                                         loading={loading}
-                                        handlesubmit={this.handleSubmit}
+                                        handleSubmit={this.handleSubmit}
+                                        handelReset={() => this.setState({ addDetail: false })}
                                     />
                                 }
 

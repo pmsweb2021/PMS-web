@@ -33,7 +33,7 @@ class PolicyDetail extends Component<RouteComponentProps> {
         const { loading, actionType, isModalOpen, addDetail, policyDetailList, selectedPolicy } = this.state
         return (
             <>
-                <Header data={firstLevelBreadcrumbs} title={`${addDetail ? 'Add Policy' : 'Policy Detail List' }`}>
+                <Header data={firstLevelBreadcrumbs} title={`${addDetail ? 'Add Policy' : 'Policy Details' }`}>
                 {!addDetail &&
                         <div className='breadcrumb-btn'>
                             <Button className='mr-2' btnType='primary' onClick={() => this.setState({ addDetail: true })}>
@@ -45,12 +45,13 @@ class PolicyDetail extends Component<RouteComponentProps> {
 				<div className='row mt-3'>
 					<div className='col-lg-12'>
 						<div className='ibox float-e-margins'>
-							<TableTitle title={`Add Policy detail`} className='text-capitalize' />
+							<TableTitle title={`${addDetail ? 'Add Policy' : 'Policy Details' }`} className='text-capitalize' />
 							<div className='ibox-content'>
                                 {addDetail &&
                                     <PolicyDetailForm
                                         loading={this.state.loading}
-                                        handlesubmit={this.handleSubmit}
+                                        handleSubmit={this.handleSubmit}
+                                        handelReset={() => this.setState({ addDetail: false })}
                                     />
                                 }
 

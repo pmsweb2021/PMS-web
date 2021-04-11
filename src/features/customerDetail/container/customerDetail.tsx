@@ -35,11 +35,11 @@ class CustomerDetail extends Component<RouteComponentProps> {
         
         return (
             <>
-                <Header data={firstLevelBreadcrumbs} title={`${addDetail ? 'Add Customer detail' : 'Customer Detail List' }`}>
+                <Header data={firstLevelBreadcrumbs} title={`${addDetail ? 'Add Customer' : 'Customer Detail List' }`}>
                     {!addDetail &&
                         <div className='breadcrumb-btn'>
                             <Button className='mr-2' btnType='primary' onClick={() => this.setState({ addDetail: true })}>
-                                Add Customer Detail
+                                Add Customer
                             </Button>
                         </div>
                     }
@@ -47,7 +47,7 @@ class CustomerDetail extends Component<RouteComponentProps> {
 				<div className='row mt-3'>
 					<div className='col-lg-12'>
 						<div className='ibox float-e-margins'>
-							<TableTitle title={`${addDetail ? 'Add Customer detail' : 'Customer Detail List' }`} className='text-capitalize' />
+							<TableTitle title={`${addDetail ? 'Add Customer' : 'Customer Details' }`} className='text-capitalize' />
 
 							<div className='ibox-content'>
                                 {addDetail && 

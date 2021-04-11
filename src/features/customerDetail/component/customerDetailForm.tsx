@@ -136,7 +136,7 @@ const CustomerDetailForm: React.FC<Props> = (props) => {
                             </div>
 							
 							<div className='col-xs-12 col-sm-12 col-md-12 mt-5'>
-								<Button className='' type='submit' disabled={props.loading} btnType='primary'>Add Customer Detail</Button>
+								<Button className='' type='submit' disabled={props.loading} btnType='primary'>Add Customer</Button>
 
                                 <Button
                                     className='ml-20'

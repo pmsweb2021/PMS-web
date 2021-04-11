@@ -9,7 +9,8 @@ import { errorMessages } from 'shared/constants/messages';
 
 interface Props {
     loading: boolean
-    handlesubmit: (initialValues: any) => void;
+    handleSubmit: (initialValues: any) => void;
+    handelReset: () => void;
 }
 
 const DropDownOptions = [
@@ -45,7 +46,7 @@ const PolicyDetailForm: React.FC<Props> = (props) => {
     return (
         <Formik
 				initialValues={initialValues}
-				onSubmit={(initialValues) => props.handlesubmit(initialValues)}
+				onSubmit={(initialValues) => props.handleSubmit(initialValues)}
 				validationSchema={formValidation}
 			>
 				{({ handleSubmit, setFieldValue, values}) => (
@@ -234,7 +235,16 @@ const PolicyDetailForm: React.FC<Props> = (props) => {
 							</div>
 
 							<div className='col-xs-12 col-sm-12 col-md-12 mt-5'>
-								<Button className='' type='submit' disabled={props.loading} btnType='primary'>Add Policy Detail</Button>
+								<Button className='' type='submit' disabled={props.loading} btnType='primary'>Add Policy</Button>
+                                <Button
+                                    className='ml-20'
+                                    type='button'
+                                    disabled={props.loading}
+                                    btnType='danger'
+                                    onClick={props.handelReset}
+                                >
+                                    Cancel
+                                </Button>
 							</div>
 						</fieldset>
 					</form>

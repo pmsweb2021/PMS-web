@@ -22,7 +22,7 @@ const CustomerDetailList: React.FC<Props> = (props) => {
 			</PbHead>
 			<PbBody>
 				{props.loading && <TableSpinner colSpan={5} />}
-				{!props.loading && !props.customerDetailList.length && <TableEmptyContainer colSpan={5} text={`No customerDetailList content found`} />}
+				{!props.loading && !props.customerDetailList.length && <TableEmptyContainer colSpan={5} text={`No Customer content found`} />}
 				{!props.loading && props.customerDetailList.length > 0 && 
                     props.customerDetailList.map((customerDetail: any, index: number) => {
                         return (
