@@ -30,7 +30,7 @@ const App: React.FC = () => {
 				<Switch>
 					<Route exact path='/customer-detail' component={asyncComponents.CustomerDetail} />
 					<Route exact path='/company-detail' component={asyncComponents.CompanyDetail} />
-					<Route exact path='/policy-detail' component={asyncComponents.PolicyDetail} />
+					<Route exact path='/quotation' component={asyncComponents.Quotation} />
 					<Redirect to='/customer-detail' />
 				</Switch>
 			</Suspense>

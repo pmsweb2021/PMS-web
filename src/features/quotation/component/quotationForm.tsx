@@ -41,6 +41,22 @@ const PolicyDetailForm: React.FC<Props> = (props) => {
         insYear: '',
         govLevy: '',
         notes: '',
+        vehicleDetail: [
+            {
+                make: '',
+                model: '',
+                regNo: '',
+                vehicleType: '',
+                category: '',
+                coverType: '',
+                windScreen: '',
+                cc: '',
+                manufactured: '',
+                weight: '',
+                sumInsured: '',
+                owner: ''
+            }
+        ]
     };
     
     return (
@@ -234,8 +250,63 @@ const PolicyDetailForm: React.FC<Props> = (props) => {
 								/>
 							</div>
 
+                            <div className='col-xs-12 col-sm-12 col-md-12'>
+                                <h2>Add Vehicle</h2>
+
+                                <div className='form-group col-xs-12 col-sm-6 col-md-3'>
+                                    <Input
+                                        type='text'
+                                        name='model'
+                                        placeholder='Model'
+                                        showLabels
+                                        setFieldValue={setFieldValue}
+                                        config={{ type: 'text', label: 'Model', name: 'model'}}
+                                    />
+                                    <ErrorMessage name={`mediaContent.model`} component={FieldErrorMessage} />
+                                </div>
+                                <div className='form-group col-xs-12 col-sm-6 col-md-3'>
+                                    <Input
+                                        type='text'
+                                        name='regNo'
+                                        placeholder='Reg No'
+                                        showLabels
+                                        setFieldValue={setFieldValue}
+                                        config={{ type: 'text', label: 'Reg No', name: 'regNo'}}
+                                    />
+                                    <ErrorMessage name={`mediaContent.regNo`} component={FieldErrorMessage} />
+                                </div>
+
+                                {VEHICLESELECT.map((vehicle: any, index: number) => (
+                                    <div className='form-group col-xs-12 col-sm-6 col-md-3' key={vehicle.name}>
+                                    <Input
+                                        type='dropdown'
+                                        name={vehicle.name}
+                                        placeholder={vehicle.placeHolder}
+                                        showLabels
+                                        setFieldValue={setFieldValue}
+                                        config={{ type: 'dropdown', label: vehicle.placeHolder, name: vehicle.name, otherOptions: { dropDownOptions: DropDownOptions } }}
+                                    />
+                                </div>
+                                ))}
+                                {VEHICLETEXTBOX.map((vehicle: any) => (
+                                    <div className='form-group col-xs-12 col-sm-6 col-md-3' key={vehicle.name}>
+                                        <Input
+                                            type={vehicle.type}
+                                            name={vehicle.name}
+                                            placeholder={vehicle.placeHolder}
+                                            showLabels
+                                            setFieldValue={setFieldValue}
+                                            config={{ type: vehicle.type, label: vehicle.placeHolder, name: vehicle.name }}
+                                        />
+                                        <ErrorMessage name={`mediaContent.regNo`} component={FieldErrorMessage} />
+                                    </div>
+                                ))
+
+                                }
+                            </div>
+
 							<div className='col-xs-12 col-sm-12 col-md-12 mt-5'>
-								<Button className='' type='submit' disabled={props.loading} btnType='primary'>Add Policy</Button>
+								<Button className='' type='submit' disabled={props.loading} btnType='primary'>Generate Quotation</Button>
                                 <Button
                                     className='ml-20'
                                     type='button'
@@ -273,7 +344,41 @@ const formValidation = Yup.object().shape({
     insYear: Yup.number().required(errorMessages.required('insYear')).strict(true),
     govLevy: Yup.number().required(errorMessages.required('govLevy')).strict(true),
     notes: Yup.string().required(errorMessages.required('notes')).strict(true),
+    vehicleDetail: Yup.array()
+        .of(
+            Yup.object().shape(
+                {
+                    make: Yup.string().required(errorMessages.required('make')).strict(true),
+                    model: Yup.string().required(errorMessages.required('model')).strict(true),
+                    regNo: Yup.string().required(errorMessages.required('regNo')).strict(true),
+                    vehicleType: Yup.string().required(errorMessages.required('vehicleType')).strict(true),
+                    category: Yup.string().required(errorMessages.required('category')).strict(true),
+                    coverType: Yup.string().required(errorMessages.required('coverType')).strict(true),
+                    windScreen: Yup.string().required(errorMessages.required('windScreen')).strict(true),
+                    cc: Yup.string().required(errorMessages.required('cc')).strict(true),
+                    manufactured: Yup.string().required(errorMessages.required('manufactured')).strict(true),
+                    weight: Yup.string().required(errorMessages.required('weight')).strict(true),
+                    sumInsured: Yup.string().required(errorMessages.required('sumInsured')).strict(true),
+                    owner: Yup.string().required(errorMessages.required('owner')).strict(true)
+                }
+            )
+        )
 })
+
+// {
+//     make: '',
+//     model: '',
+//     regNo: '',
+//     vehicleType: '',
+//     category: '',
+//     coverType: '',
+//     windScreen: '',
+//     cc: '',
+//     manufactured: '',
+//     weight: '',
+//     sumInsured: '',
+//     owner: ''
+// }
 
 export default PolicyDetailForm;
 
@@ -283,4 +388,19 @@ const DATEPICKERS = [
     { key: 'proposedInceptionDate',  placeHolder: 'proposedInceptionDate' }, 
     { key: 'policyStartDate',  placeHolder: 'Policy start date' },
     { key: 'proposedEndDate',  placeHolder: 'proposed End date' },
+]
+
+const VEHICLESELECT = [
+    {name: 'vehicleType', placeHolder:'Vehicle Type'},
+    {name: 'category', placeHolder:'Category'},
+    {name: 'coverType', placeHolder:'Cover Type'},
+]
+
+const VEHICLETEXTBOX = [
+    { type: 'text', name: 'windScreen', placeHolder: 'windScreen' },
+    { type: 'text', name: 'cc', placeHolder: 'CC' },
+    { type: 'text', name: 'manufactured', placeHolder: 'Manufactured' },
+    { type: 'text', name: 'weight', placeHolder: 'Gross Weight' },
+    { type: 'text', name: 'sumInsured', placeHolder: 'Sum Insured' },
+    { type: 'text', name: 'owner', placeHolder: 'Registered Owner' },
 ]

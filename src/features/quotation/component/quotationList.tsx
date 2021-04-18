@@ -3,12 +3,12 @@ import Button from 'shared/components/form/button';
 import { PbBody, PbCell, PbHead, PbRow, PbTable, TableEmptyContainer, TableSpinner } from 'shared/components/table';
 
 interface Props {
-    policyDetailList: [];
+    quotationDetailList: [];
     loading: boolean;
     changeActionType: (actinTpe: string, selectedCustomer: string) => void;
 }
 
-const PolicyDetailList: React.FC<Props> = (props) => {
+const QuotationDetailList: React.FC<Props> = (props) => {
     return (
         <PbTable>
 			<PbHead>
@@ -22,9 +22,9 @@ const PolicyDetailList: React.FC<Props> = (props) => {
 			</PbHead>
 			<PbBody>
 				{props.loading && <TableSpinner colSpan={5} />}
-				{!props.loading && !props.policyDetailList.length && <TableEmptyContainer colSpan={5} text={`No Policy content found`} />}
-				{!props.loading && props.policyDetailList.length > 0 && 
-                    props.policyDetailList.map((company: any, index: number) => {
+				{!props.loading && !props.quotationDetailList.length && <TableEmptyContainer colSpan={5} text={`No Policy content found`} />}
+				{!props.loading && props.quotationDetailList.length > 0 && 
+                    props.quotationDetailList.map((company: any, index: number) => {
                         return (
                             <PbRow key={index}>
                                 <PbCell>{index + 1}</PbCell>
@@ -51,4 +51,4 @@ const PolicyDetailList: React.FC<Props> = (props) => {
     )
 }
 
-export default PolicyDetailList;
+export default QuotationDetailList;

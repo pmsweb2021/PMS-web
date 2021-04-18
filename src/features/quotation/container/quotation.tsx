@@ -4,40 +4,40 @@ import { RouteComponentProps, withRouter } from 'react-router';
 import { TableTitle } from 'shared/components/table';
 import { firstLevelBreadcrumbs } from 'shared/constants/constants';
 import Header from 'shared/components/header/header';
-import PolicyDetailForm from '../component/policyDetailForm';
+import PolicyDetailForm from '../component/quotationForm';
 import Button from 'shared/components/form/button';
-import PolicyDetailList from '../component/policyDetailList';
+import QuotationDetailList from '../component/quotationList';
 import Modal from 'shared/components/modal/modal';
-import PolicyDetailModal from '../component/policyDetaillModal';
+import QuotationDetailModal from '../component/quotationDetailModal';
 
 interface UIState {
     loading: boolean;
-    addDetail: boolean;
-    policyDetailList: any;
+    addQuotation: boolean;
+    quotationDetailList: any;
     isModalOpen: boolean;
     actionType: string;
-    selectedPolicy: string;
+    selectedQuotation: string;
 }
 
 class PolicyDetail extends Component<RouteComponentProps> {
     state: UIState = {
         loading: false,
-        addDetail: false,
-        policyDetailList: [],
+        addQuotation: true,
+        quotationDetailList: [],
         isModalOpen: false,
         actionType: '',
-        selectedPolicy: ''
+        selectedQuotation: '',
     }
 
     render () {
-        const { loading, actionType, isModalOpen, addDetail, policyDetailList, selectedPolicy } = this.state
+        const { loading, actionType, isModalOpen, addQuotation, quotationDetailList, selectedQuotation } = this.state
         return (
             <>
-                <Header data={firstLevelBreadcrumbs} title={`${addDetail ? 'Add Policy' : 'Policy Details' }`}>
-                {!addDetail &&
+                <Header data={firstLevelBreadcrumbs} title={`${addQuotation ? 'View Quotation' : 'Quotation' }`}>
+                {!addQuotation &&
                         <div className='breadcrumb-btn'>
-                            <Button className='mr-2' btnType='primary' onClick={() => this.setState({ addDetail: true })}>
-                                Add Policy
+                            <Button className='mr-2' btnType='primary' onClick={() => this.setState({ addQuotation: true })}>
+                                View Quotation
                             </Button>
                         </div>
                     }
@@ -45,33 +45,32 @@ class PolicyDetail extends Component<RouteComponentProps> {
 				<div className='row mt-3'>
 					<div className='col-lg-12'>
 						<div className='ibox float-e-margins'>
-							<TableTitle title={`${addDetail ? 'Add Policy' : 'Policy Details' }`} className='text-capitalize' />
+							<TableTitle title={`${addQuotation ? 'View Quotation' : 'Quotation' }`} className='text-capitalize' />
 							<div className='ibox-content'>
-                                {addDetail &&
+                                {addQuotation &&
                                     <PolicyDetailForm
                                         loading={this.state.loading}
                                         handleSubmit={this.handleSubmit}
-                                        handelReset={() => this.setState({ addDetail: false })}
+                                        handelReset={() => this.setState({ addQuotation: false })}
                                     />
                                 }
 
-                                {!addDetail &&
-                                    <PolicyDetailList
-                                        policyDetailList = {policyDetailList}
+                                {!addQuotation &&
+                                    <QuotationDetailList
+                                        quotationDetailList = {quotationDetailList}
                                         loading= {loading}
                                         changeActionType={this.changeActionType}
                                     />
                                 }
                                 
-
                                 {actionType === 'view' && isModalOpen && 
                                     <Modal
                                         show={true}
-                                        modalTitle='Company Detail'
+                                        modalTitle='Quotation Detail'
                                         handleClose={this.handleCloseModel}
                                     >
-                                        <PolicyDetailModal
-                                            policyDetail={policyDetailList[selectedPolicy]}
+                                        <QuotationDetailModal
+                                            quotationDetail={quotationDetailList[selectedQuotation]}
                                         />
                                     </Modal>
                                 }
@@ -84,14 +83,14 @@ class PolicyDetail extends Component<RouteComponentProps> {
     }
 
     handleSubmit= (values: any) => {
-        const policyDetailList = this.state.policyDetailList;
-        policyDetailList.push(values)
+        const quotationDetailList = this.state.quotationDetailList;
+        quotationDetailList.push(values)
 
-        this.setState({ policyDetailList, addDetail: false })
+        this.setState({ quotationDetailList, addQuotation: false })
     }
 
-    changeActionType = (actionType: string, selectedPolicy: string) => {
-        this.setState({ isModalOpen: true, actionType, selectedPolicy})
+    changeActionType = (actionType: string, selectedQuotation: string) => {
+        this.setState({ isModalOpen: true, actionType, selectedQuotation})
     }
 
     handleCloseModel = () => this.setState({ isModalOpen: false, actionType: ''});

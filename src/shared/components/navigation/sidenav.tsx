@@ -55,9 +55,9 @@ class SideNav extends PureComponent<OwnProps> {
 					<NavItem
 						isOpen={this.state.openStatus.Events || false}
 						toggleIsOpen={this.toggleIsOpen}
-						key={'Policy-detail'}
+						key={'Quotation'}
 						renderSideNav={this.props.renderSideNav}
-						menu={{ name: 'Policy Detail', route: '/policy-detail', icon: 'document' }}
+						menu={{ name: 'Quotation', route: '/quotation', icon: 'document' }}
 					/>
 				</ul>
 			</nav>
