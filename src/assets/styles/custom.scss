@@ -2377,3 +2377,10 @@ button:disabled {
 .col-4 {
 	width: 25%;
 }
+
+.vehicle-detail {
+	.modal-dialog {
+		max-width: 1180px;	
+		width: 95%;
+	}
+}
