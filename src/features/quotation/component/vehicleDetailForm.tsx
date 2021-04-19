@@ -14,6 +14,9 @@ interface Props {
     handelReset: () => void;
     isModalOpen: boolean;
     closeModal: () => void;
+    vehicleList: any[];
+    submitVehicleDetail: (params: any) => void;
+    addNewVehicle: (params: any) => void;
 }
 
 const DropDownOptions = [
@@ -25,6 +28,9 @@ const DropDownOptions = [
 
 const VehicleDetailForm: React.FC<Props> = (props) => {
     const { isModalOpen, closeModal } = props;
+    const [actionType, changeActionType] = useState('');
+    console.log(actionType, 'actionType');
+    
     const initialValues = {
         make: '',
         model: '',
@@ -48,10 +54,18 @@ const VehicleDetailForm: React.FC<Props> = (props) => {
         >
             <Formik
                 initialValues={initialValues}
-                onSubmit={(initialValues) => props.handleSubmit(initialValues)}
+                onSubmit={(initialValues, {resetForm}) => {
+                    if (actionType === 'addNew') {
+                        props.addNewVehicle(initialValues);
+                        return resetForm();
+                    }
+
+                    props.submitVehicleDetail(initialValues)
+                    return resetForm();
+                }}
                 validationSchema={formValidation}
             >
-                {({ handleSubmit, setFieldValue, values}) => (
+                {({ handleSubmit, setFieldValue }) => (
                     <form onSubmit={handleSubmit} className='media-form'>
                         <fieldset className='row'>
                             {props.loading && <div className='form-loading d-flex justify-content-center align-items--center'>
@@ -60,6 +74,17 @@ const VehicleDetailForm: React.FC<Props> = (props) => {
                             <div className='col-xs-12 col-sm-12 col-md-12'>
                                 <h2 className='mt-0'>Add Vehicle</h2>
 
+                                <div className='form-group col-xs-12 col-sm-6 col-md-3'>
+                                    <Input
+                                        type='text'
+                                        name='make'
+                                        placeholder='Make'
+                                        showLabels
+                                        setFieldValue={setFieldValue}
+                                        config={{ type: 'text', label: 'Make', name: 'make'}}
+                                    />
+                                    <ErrorMessage name={`mediaContent.model`} component={FieldErrorMessage} />
+                                </div>
                                 <div className='form-group col-xs-12 col-sm-6 col-md-3'>
                                     <Input
                                         type='text'
@@ -112,16 +137,25 @@ const VehicleDetailForm: React.FC<Props> = (props) => {
                             </div>
 
                             <div className='col-xs-12 col-sm-12 col-md-12 mt-5'>
-                                <Button className='' type='submit' disabled={props.loading} btnType='primary'>Generate Quotation</Button>
                                 <Button
-                                    className='ml-20'
-                                    type='button'
-                                    disabled={props.loading}
-                                    btnType='danger'
-                                    onClick={props.handelReset}
+                                    className=''
+                                    type='submit' 
+                                    disabled={props.loading} 
+                                    btnType='primary'
+                                    onClick={() => changeActionType('submit')}
                                 >
-                                    Cancel
+                                    Submit Vehicle Detail
                                 </Button>
+                                
+                                    <Button
+                                        className='ml-10'
+                                        type='submit'
+                                        disabled={props.loading}
+                                        btnType='primary'
+                                        onClick={() => changeActionType('addNew')}
+                                    >
+                                        Add Vehicle Detail
+                                    </Button>
                             </div>
                         </fieldset>
                     </form>

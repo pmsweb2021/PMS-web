@@ -37,23 +37,3 @@ const quotationDetailModal: React .FC<Props> = (props) => (
 )
 
 export default quotationDetailModal;
-
-// status : '',
-// referenceNumber: '',
-// companyName: '',insYear
-// contactPerson: '',
-// quoteType: '',
-// policyType: '',
-// quoteDate: '',
-// acceptedDate: '',
-// proposedInceptionDate: '',
-// policyStartDate: '',
-// paymentMethod: '',
-// proposedEndDate: '',
-// brokerInformation:'',
-// brokgType: '',
-// brokerage: '',
-// SAPno: '',
-// insYear: '',
-// govLevy: '',
-// notes: '',

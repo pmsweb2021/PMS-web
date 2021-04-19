@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ErrorMessage, Formik } from 'formik';
 import * as Yup from 'yup';
 import Button from 'shared/components/form/button';
@@ -23,6 +23,11 @@ const DropDownOptions = [
 
 const QuotationForm: React.FC<Props> = (props) => {
     const [isModalOpen, handleModalState] = useState(false);
+    const [vehicleList, handleVehicleList]= useState([]) as any[]; 
+
+    // useEffect(() => {
+        
+    // }, [vehicleList])
 
     const initialValues = {
         status : '',
@@ -44,7 +49,21 @@ const QuotationForm: React.FC<Props> = (props) => {
         insYear: '',
         govLevy: '',
         notes: '',
+        vehicleList: vehicleList.length,
     };
+
+    const addNewVehicle = (params: any) => {
+        const oldVehicleList: any[] = vehicleList;
+        oldVehicleList.push(params);
+        handleVehicleList(oldVehicleList);
+    }
+
+    const submitVehicleDetail = (params: any) => {
+        const oldVehicleList: any[] = vehicleList;
+        oldVehicleList.push(params);
+        handleVehicleList(oldVehicleList);
+        handleModalState(false);
+    }
     
     return (
         <>
@@ -249,6 +268,20 @@ const QuotationForm: React.FC<Props> = (props) => {
                                 Add Vehicle
                             </Button>
                             </div>
+                            <div className='form-group col-xs-12 col-sm-6 col-md-12'>
+                            <Input
+                                className=''
+                                type='number'
+                                name='vehicleList'
+                                placeholder='vehicleList'
+                                showLabels
+                                setFieldValue={setFieldValue}
+                                value={vehicleList.length}
+                                // value={}
+                                config={{ type: 'number', label: '', name: 'vehicleList'}}
+                            />
+                            <ErrorMessage name={`mediaContent.vehicleList`} component={FieldErrorMessage} />
+                        </div>
                         </div>
                         <div className='col-xs-12 col-sm-12 col-md-12 mt-5'>
                             <Button className='' type='submit' disabled={props.loading} btnType='primary'>Generate Quotation</Button>
@@ -272,6 +305,9 @@ const QuotationForm: React.FC<Props> = (props) => {
             handelReset= {() => console.log()}
             isModalOpen= {isModalOpen}
             closeModal= {() => handleModalState(false)}
+            vehicleList= {vehicleList}
+            addNewVehicle= {addNewVehicle}
+            submitVehicleDetail= {submitVehicleDetail}
         />
         </>
     )
@@ -297,6 +333,7 @@ const formValidation = Yup.object().shape({
     insYear: Yup.number().required(errorMessages.required('insYear')).strict(true),
     govLevy: Yup.number().required(errorMessages.required('govLevy')).strict(true),
     notes: Yup.string().required(errorMessages.required('notes')).strict(true),
+    vehicleList: Yup.number().min(1),
 })
 
 
