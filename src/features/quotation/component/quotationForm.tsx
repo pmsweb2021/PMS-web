@@ -7,6 +7,7 @@ import { Input, InputDatePicker } from 'shared/components/form/inputTypes';
 import Spinner from 'shared/components/spinner/spinner';
 import { errorMessages } from 'shared/constants/messages';
 import VehicleDetailForm from './vehicleDetailForm';
+import VehicleList from './vehicleList';
 
 interface Props {
     loading: boolean
@@ -24,10 +25,6 @@ const DropDownOptions = [
 const QuotationForm: React.FC<Props> = (props) => {
     const [isModalOpen, handleModalState] = useState(false);
     const [vehicleList, handleVehicleList]= useState([]) as any[]; 
-
-    // useEffect(() => {
-        
-    // }, [vehicleList])
 
     const initialValues = {
         status : '',
@@ -56,6 +53,8 @@ const QuotationForm: React.FC<Props> = (props) => {
         const oldVehicleList: any[] = vehicleList;
         oldVehicleList.push(params);
         handleVehicleList(oldVehicleList);
+        handleModalState(false);
+        handleModalState(true);
     }
 
     const submitVehicleDetail = (params: any) => {
@@ -64,251 +63,255 @@ const QuotationForm: React.FC<Props> = (props) => {
         handleVehicleList(oldVehicleList);
         handleModalState(false);
     }
-    
     return (
         <>
-        <Formik
-            initialValues={initialValues}
-            onSubmit={(initialValues) => props.handleSubmit(initialValues)}
-            validationSchema={formValidation}
-        >
-            {({ handleSubmit, setFieldValue, values}) => (
-                <form onSubmit={handleSubmit} className='media-form'>
-                    <fieldset className='row'>
-                        {props.loading && <div className='form-loading d-flex justify-content-center align-items--center'>
-                            <Spinner />
-                        </div>}
+            <Formik
+                initialValues={initialValues}
+                onSubmit={(initialValues) => props.handleSubmit(initialValues)}
+                validationSchema={formValidation}
+            >
+                {({ handleSubmit, setFieldValue, values}) => (
+                    <form onSubmit={handleSubmit} className='media-form'>
+                        <fieldset className='row'>
+                            {props.loading && <div className='form-loading d-flex justify-content-center align-items--center'>
+                                <Spinner />
+                            </div>}
 
-                        <div className='form-group col-xs-12 col-sm-6 col-md-3'>
-                            <Input
-                                type='text'
-                                name='status'
-                                placeholder='Quote'
-                                showLabels
-                                setFieldValue={setFieldValue}
-                                config={{ type: 'text', label: 'Status', name: 'status'}}
-                            />
-                            <ErrorMessage name={`mediaContent.status`} component={FieldErrorMessage} />
-                        </div>
-
-                        <div className='form-group col-xs-12 col-sm-6 col-md-3'>
-                            <Input
-                                type='text'
-                                name='referenceNumber'
-                                placeholder='Reference Number'
-                                showLabels
-                                setFieldValue={setFieldValue}
-                                config={{ type: 'text', label: 'Reference Number', name: 'referenceNumber'}}
-                            />
-                            <ErrorMessage name={`mediaContent.referenceNumber`} component={FieldErrorMessage} />
-                        </div>
-
-                        <div className='form-group col-xs-12 col-sm-6 col-md-3'>
-                            <Input
-                                type='dropdown'
-                                name='companyName'
-                                placeholder='Company Name'
-                                showLabels
-                                setFieldValue={setFieldValue}
-                                config={{ type: 'dropdown', label: 'Company Name', name: 'companyName', otherOptions: { dropDownOptions: DropDownOptions } }}
-                            />
-                        </div>
-
-                        <div className='form-group col-xs-12 col-sm-6 col-md-3'>
-                            <Input
-                                type='dropdown'
-                                name='contactPerson'
-                                placeholder='Contact Person'
-                                showLabels
-                                setFieldValue={setFieldValue}
-                                config={{ type: 'dropdown', label: 'Contact Person', name: 'contactPerson', otherOptions: { dropDownOptions: DropDownOptions } }}
-                            />
-                        </div>
-
-                        <div className='form-group col-xs-12 col-sm-6 col-md-3'>
-                            <Input
-                                type='text'
-                                name='quoteType'
-                                placeholder='Quote Type'
-                                showLabels
-                                setFieldValue={setFieldValue}
-                                config={{ type: 'text', label: 'Quote Type', name: 'quoteType'}}
-                            />
-                            <ErrorMessage name={`mediaContent.quoteType`} component={FieldErrorMessage} />
-                        </div>
-
-                        <div className='form-group col-xs-12 col-sm-6 col-md-3'>
-                            <Input
-                                type='text'
-                                name='policyType'
-                                placeholder='Policy Type'
-                                showLabels
-                                setFieldValue={setFieldValue}
-                                config={{ type: 'text', label: 'Policy Type', name: 'policyType'}}
-                            />
-                            <ErrorMessage name={`mediaContent.policyType`} component={FieldErrorMessage} />
-                        </div>
-
-                        {DATEPICKERS.map((inputItem) => (
-                            <div className='form-group col-xs-12 col-sm-6 col-md-3' key={inputItem.key}>
-                                <InputDatePicker
+                            <div className='form-group col-xs-12 col-sm-6 col-md-3'>
+                                <Input
+                                    type='text'
+                                    name='status'
+                                    placeholder='Quote'
+                                    showLabels
                                     setFieldValue={setFieldValue}
-                                    minDate={new Date()}
-                                    label={inputItem.placeHolder}
-                                    name={inputItem.key}
-                                    dateFormat={'MM-dd-yyyy'}
-                                    onChange={(date: Date | null) => {
-                                        setFieldValue(inputItem.key, date);
-                                    }}
-                                    placeHolder={inputItem.placeHolder}
+                                    config={{ type: 'text', label: 'Status', name: 'status'}}
+                                />
+                                <ErrorMessage name={`mediaContent.status`} component={FieldErrorMessage} />
+                            </div>
+
+                            <div className='form-group col-xs-12 col-sm-6 col-md-3'>
+                                <Input
+                                    type='text'
+                                    name='referenceNumber'
+                                    placeholder='Reference Number'
+                                    showLabels
+                                    setFieldValue={setFieldValue}
+                                    config={{ type: 'text', label: 'Reference Number', name: 'referenceNumber'}}
+                                />
+                                <ErrorMessage name={`mediaContent.referenceNumber`} component={FieldErrorMessage} />
+                            </div>
+
+                            <div className='form-group col-xs-12 col-sm-6 col-md-3'>
+                                <Input
+                                    type='dropdown'
+                                    name='companyName'
+                                    placeholder='Company Name'
+                                    showLabels
+                                    setFieldValue={setFieldValue}
+                                    config={{ type: 'dropdown', label: 'Company Name', name: 'companyName', otherOptions: { dropDownOptions: DropDownOptions } }}
                                 />
                             </div>
-                        ))}
 
-                        <div className='form-group col-xs-12 col-sm-6 col-md-3'>
-                            <Input
-                                type='dropdown'
-                                name='paymentMethod'
-                                placeholder='Payment Method'
-                                showLabels
-                                setFieldValue={setFieldValue}
-                                config={{ type: 'dropdown', label: 'Payment Method', name: 'paymentMethod', otherOptions: { dropDownOptions: DropDownOptions } }}
-                            />
-                        </div>
-
-                        <div className='form-group col-xs-12 col-sm-6 col-md-3'>
-                            <Input
-                                type='dropdown'
-                                name='brokerInformation'
-                                placeholder='Broker Information'
-                                showLabels
-                                setFieldValue={setFieldValue}
-                                config={{ type: 'dropdown', label: 'Broker Information', name: 'brokerInformation', otherOptions: { dropDownOptions: DropDownOptions } }}
-                            />
-                        </div>
-
-                        <div className='form-group col-xs-12 col-sm-6 col-md-3'>
-                            <Input
-                                type='dropdown'
-                                name='brokgType'
-                                placeholder='Breokg. Type'
-                                showLabels
-                                setFieldValue={setFieldValue}
-                                config={{ type: 'dropdown', label: 'Brokg. Type', name: 'brokgType', otherOptions: { dropDownOptions: DropDownOptions } }}
-                            />
-                        </div>
-
-                        <div className='form-group col-xs-12 col-sm-6 col-md-3'>
-                            <Input
-                                type='number'
-                                name='brokerage'
-                                placeholder='Brokerage'
-                                showLabels
-                                setFieldValue={setFieldValue}
-                                config={{ type: 'number', label: 'Brokerage', name: 'brokerage'}}
-                            />
-                            <ErrorMessage name={`mediaContent.brokerage`} component={FieldErrorMessage} />
-                        </div>
-
-                        <div className='form-group col-xs-12 col-sm-6 col-md-3'>
-                            <Input
-                                type='number'
-                                name='SAPno'
-                                placeholder='SAP no'
-                                showLabels
-                                setFieldValue={setFieldValue}
-                                config={{ type: 'number', label: 'SAP no', name: 'SAPno'}}
-                            />
-                            <ErrorMessage name={`mediaContent.brokerage`} component={FieldErrorMessage} />
-                        </div>
-
-                        <div className='form-group col-xs-12 col-sm-6 col-md-3'>
-                            <Input
-                                type='number'
-                                name='insYear'
-                                placeholder='ins. Year'
-                                showLabels
-                                setFieldValue={setFieldValue}
-                                config={{ type: 'number', label: 'ins. Year', name: 'insYear'}}
-                            />
-                            <ErrorMessage name={`mediaContent.insYear`} component={FieldErrorMessage} />
-                        </div>
-                        
-                        <div className='form-group col-xs-12 col-sm-6 col-md-3'>
-                            <Input
-                                type='number'
-                                name='govLevy'
-                                placeholder='Gov. Levy'
-                                showLabels
-                                setFieldValue={setFieldValue}
-                                config={{ type: 'number', label: 'Gov. Levy', name: 'govLevy'}}
-                            />
-                            <ErrorMessage name={`mediaContent.brokerage`} component={FieldErrorMessage} />
-                        </div>
-
-                        <div className='form-group col-xs-12 col-sm-12 col-md-12'>
-                            <Input
-                                type='textarea'
-                                name={'notes'}
-                                placeholder={'Notes'}
-                                showLabels
-                                setFieldValue={setFieldValue}
-                                config={{ type: 'text', label: 'Notes', name: 'notes' }}
-                            />
-                        </div>
-                        <div className='col-xs-12 col-sm-12 col-md-4 mt-5'>
-                            <div className='d-flex align-items-center justify-content-space-between'>
-                            <h2>Vehicle Detail</h2>
-                            <Button 
-                                className=''
-                                disabled={props.loading} 
-                                btnType='primary'
-                                onClick={() => handleModalState(true)}
-                            >
-                                Add Vehicle
-                            </Button>
+                            <div className='form-group col-xs-12 col-sm-6 col-md-3'>
+                                <Input
+                                    type='dropdown'
+                                    name='contactPerson'
+                                    placeholder='Contact Person'
+                                    showLabels
+                                    setFieldValue={setFieldValue}
+                                    config={{ type: 'dropdown', label: 'Contact Person', name: 'contactPerson', otherOptions: { dropDownOptions: DropDownOptions } }}
+                                />
                             </div>
-                            <div className='form-group col-xs-12 col-sm-6 col-md-12'>
-                            <Input
-                                className=''
-                                type='number'
-                                name='vehicleList'
-                                placeholder='vehicleList'
-                                showLabels
-                                setFieldValue={setFieldValue}
-                                value={vehicleList.length}
-                                // value={}
-                                config={{ type: 'number', label: '', name: 'vehicleList'}}
-                            />
-                            <ErrorMessage name={`mediaContent.vehicleList`} component={FieldErrorMessage} />
-                        </div>
-                        </div>
-                        <div className='col-xs-12 col-sm-12 col-md-12 mt-5'>
-                            <Button className='' type='submit' disabled={props.loading} btnType='primary'>Generate Quotation</Button>
-                            <Button
-                                className='ml-20'
-                                type='button'
-                                disabled={props.loading}
-                                btnType='danger'
-                                onClick={props.handelReset}
-                            >
-                                Cancel
-                            </Button>
-                        </div>
-                    </fieldset>
-                </form>
-            )}
-        </Formik>
-        <VehicleDetailForm
-            loading= {false}
-            handleSubmit= {() => console.log()}
-            handelReset= {() => console.log()}
-            isModalOpen= {isModalOpen}
-            closeModal= {() => handleModalState(false)}
-            vehicleList= {vehicleList}
-            addNewVehicle= {addNewVehicle}
-            submitVehicleDetail= {submitVehicleDetail}
-        />
+
+                            <div className='form-group col-xs-12 col-sm-6 col-md-3'>
+                                <Input
+                                    type='text'
+                                    name='quoteType'
+                                    placeholder='Quote Type'
+                                    showLabels
+                                    setFieldValue={setFieldValue}
+                                    config={{ type: 'text', label: 'Quote Type', name: 'quoteType'}}
+                                />
+                                <ErrorMessage name={`mediaContent.quoteType`} component={FieldErrorMessage} />
+                            </div>
+
+                            <div className='form-group col-xs-12 col-sm-6 col-md-3'>
+                                <Input
+                                    type='text'
+                                    name='policyType'
+                                    placeholder='Policy Type'
+                                    showLabels
+                                    setFieldValue={setFieldValue}
+                                    config={{ type: 'text', label: 'Policy Type', name: 'policyType'}}
+                                />
+                                <ErrorMessage name={`mediaContent.policyType`} component={FieldErrorMessage} />
+                            </div>
+
+                            {DATEPICKERS.map((inputItem) => (
+                                <div className='form-group col-xs-12 col-sm-6 col-md-3' key={inputItem.key}>
+                                    <InputDatePicker
+                                        setFieldValue={setFieldValue}
+                                        minDate={new Date()}
+                                        label={inputItem.placeHolder}
+                                        name={inputItem.key}
+                                        dateFormat={'MM-dd-yyyy'}
+                                        onChange={(date: Date | null) => {
+                                            setFieldValue(inputItem.key, date);
+                                        }}
+                                        placeHolder={inputItem.placeHolder}
+                                    />
+                                </div>
+                            ))}
+
+                            <div className='form-group col-xs-12 col-sm-6 col-md-3'>
+                                <Input
+                                    type='dropdown'
+                                    name='paymentMethod'
+                                    placeholder='Payment Method'
+                                    showLabels
+                                    setFieldValue={setFieldValue}
+                                    config={{ type: 'dropdown', label: 'Payment Method', name: 'paymentMethod', otherOptions: { dropDownOptions: DropDownOptions } }}
+                                />
+                            </div>
+
+                            <div className='form-group col-xs-12 col-sm-6 col-md-3'>
+                                <Input
+                                    type='dropdown'
+                                    name='brokerInformation'
+                                    placeholder='Broker Information'
+                                    showLabels
+                                    setFieldValue={setFieldValue}
+                                    config={{ type: 'dropdown', label: 'Broker Information', name: 'brokerInformation', otherOptions: { dropDownOptions: DropDownOptions } }}
+                                />
+                            </div>
+
+                            <div className='form-group col-xs-12 col-sm-6 col-md-3'>
+                                <Input
+                                    type='dropdown'
+                                    name='brokgType'
+                                    placeholder='Breokg. Type'
+                                    showLabels
+                                    setFieldValue={setFieldValue}
+                                    config={{ type: 'dropdown', label: 'Brokg. Type', name: 'brokgType', otherOptions: { dropDownOptions: DropDownOptions } }}
+                                />
+                            </div>
+
+                            <div className='form-group col-xs-12 col-sm-6 col-md-3'>
+                                <Input
+                                    type='number'
+                                    name='brokerage'
+                                    placeholder='Brokerage'
+                                    showLabels
+                                    setFieldValue={setFieldValue}
+                                    config={{ type: 'number', label: 'Brokerage', name: 'brokerage'}}
+                                />
+                                <ErrorMessage name={`mediaContent.brokerage`} component={FieldErrorMessage} />
+                            </div>
+
+                            <div className='form-group col-xs-12 col-sm-6 col-md-3'>
+                                <Input
+                                    type='number'
+                                    name='SAPno'
+                                    placeholder='SAP no'
+                                    showLabels
+                                    setFieldValue={setFieldValue}
+                                    config={{ type: 'number', label: 'SAP no', name: 'SAPno'}}
+                                />
+                                <ErrorMessage name={`mediaContent.brokerage`} component={FieldErrorMessage} />
+                            </div>
+
+                            <div className='form-group col-xs-12 col-sm-6 col-md-3'>
+                                <Input
+                                    type='number'
+                                    name='insYear'
+                                    placeholder='ins. Year'
+                                    showLabels
+                                    setFieldValue={setFieldValue}
+                                    config={{ type: 'number', label: 'ins. Year', name: 'insYear'}}
+                                />
+                                <ErrorMessage name={`mediaContent.insYear`} component={FieldErrorMessage} />
+                            </div>
+                            
+                            <div className='form-group col-xs-12 col-sm-6 col-md-3'>
+                                <Input
+                                    type='number'
+                                    name='govLevy'
+                                    placeholder='Gov. Levy'
+                                    showLabels
+                                    setFieldValue={setFieldValue}
+                                    config={{ type: 'number', label: 'Gov. Levy', name: 'govLevy'}}
+                                />
+                                <ErrorMessage name={`mediaContent.brokerage`} component={FieldErrorMessage} />
+                            </div>
+
+                            <div className='form-group col-xs-12 col-sm-12 col-md-12'>
+                                <Input
+                                    type='textarea'
+                                    name={'notes'}
+                                    placeholder={'Notes'}
+                                    showLabels
+                                    setFieldValue={setFieldValue}
+                                    config={{ type: 'text', label: 'Notes', name: 'notes' }}
+                                />
+                            </div>
+                            <div className='col-xs-12 col-sm-12 col-md-12 mt-5'>
+                                <div className='d-flex align-items-center justify-content-space-between'>
+                                    <h2>Vehicle Detail</h2>
+                                    <Button 
+                                        className=''
+                                        disabled={props.loading} 
+                                        btnType='primary'
+                                        onClick={() => handleModalState(true)}
+                                    >
+                                        Add Vehicle
+                                    </Button>
+                                </div>
+                                <div className='form-group col-xs-12 col-sm-6 col-md-12'>
+                                    <Input
+                                        className=''
+                                        type='number'
+                                        name='vehicleList'
+                                        placeholder='vehicleList'
+                                        showLabels
+                                        setFieldValue={setFieldValue}
+                                        value={vehicleList.length}
+                                        // value={}
+                                        config={{ type: 'number', label: '', name: 'vehicleList'}}
+                                    />
+                                    <ErrorMessage name={`mediaContent.vehicleList`} component={FieldErrorMessage} />
+                                </div>
+                            </div>
+                            {vehicleList.length > 0 &&
+                                <VehicleList
+                                    vehicleList = {vehicleList}
+                                />
+                            }
+                            <div className='col-xs-12 col-sm-12 col-md-12 mt-5'>
+                                <Button className='' type='submit' disabled={props.loading} btnType='primary'>Generate Quotation</Button>
+                                <Button
+                                    className='ml-20'
+                                    type='button'
+                                    disabled={props.loading}
+                                    btnType='danger'
+                                    onClick={props.handelReset}
+                                >
+                                    Cancel
+                                </Button>
+                            </div>
+                        </fieldset>
+                    </form>
+                )}
+            </Formik>
+            <VehicleDetailForm
+                loading= {false}
+                handleSubmit= {() => console.log()}
+                handelReset= {() => console.log()}
+                isModalOpen= {isModalOpen}
+                closeModal= {() => handleModalState(false)}
+                vehicleList= {vehicleList}
+                addNewVehicle= {addNewVehicle}
+                submitVehicleDetail= {submitVehicleDetail}
+            />
         </>
     )
 }

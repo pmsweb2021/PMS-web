@@ -7,6 +7,7 @@ import { Input, InputDatePicker } from 'shared/components/form/inputTypes';
 import Spinner from 'shared/components/spinner/spinner';
 import { errorMessages } from 'shared/constants/messages';
 import Modal from 'shared/components/modal/modal';
+import VehicleList from './vehicleList';
 
 interface Props {
     loading: boolean
@@ -29,7 +30,7 @@ const DropDownOptions = [
 const VehicleDetailForm: React.FC<Props> = (props) => {
     const { isModalOpen, closeModal } = props;
     const [actionType, changeActionType] = useState('');
-    console.log(actionType, 'actionType');
+    console.log(actionType, props.vehicleList, 'actionType');
     
     const initialValues = {
         make: '',
@@ -138,7 +139,7 @@ const VehicleDetailForm: React.FC<Props> = (props) => {
 
                             <div className='col-xs-12 col-sm-12 col-md-12 mt-5'>
                                 <Button
-                                    className=''
+                                    className='ml-10'
                                     type='submit' 
                                     disabled={props.loading} 
                                     btnType='primary'
@@ -146,21 +147,26 @@ const VehicleDetailForm: React.FC<Props> = (props) => {
                                 >
                                     Submit Vehicle Detail
                                 </Button>
+                                <Button
+                                    className='ml-10'
+                                    type='submit'
+                                    disabled={props.loading}
+                                    btnType='primary'
+                                    onClick={() => changeActionType('addNew')}
+                                >
+                                    Add Vehicle Detail
+                                </Button>
                                 
-                                    <Button
-                                        className='ml-10'
-                                        type='submit'
-                                        disabled={props.loading}
-                                        btnType='primary'
-                                        onClick={() => changeActionType('addNew')}
-                                    >
-                                        Add Vehicle Detail
-                                    </Button>
                             </div>
                         </fieldset>
                     </form>
                 )}
             </Formik>
+            {props.vehicleList.length > 0 &&
+                <VehicleList
+                    vehicleList = {props.vehicleList}
+                />
+            }
         </Modal>
     )
 }

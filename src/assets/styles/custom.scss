@@ -2384,3 +2384,14 @@ button:disabled {
 		width: 95%;
 	}
 }
+
+.vehicle-list {
+	margin-top: 20px;
+
+	.vehicle-detail {
+		box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.1);
+		border-radius: 4px;
+		padding: 9px;
+		margin-bottom: 15px;
+	}
+}
