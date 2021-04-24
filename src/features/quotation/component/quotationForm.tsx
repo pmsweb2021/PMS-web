@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ErrorMessage, Formik } from 'formik';
+import { ErrorMessage, Field, Formik } from 'formik';
 import * as Yup from 'yup';
 import Button from 'shared/components/form/button';
 import FieldErrorMessage from 'shared/components/form/error';
@@ -25,6 +25,7 @@ const DropDownOptions = [
 const QuotationForm: React.FC<Props> = (props) => {
     const [isModalOpen, handleModalState] = useState(false);
     const [vehicleList, handleVehicleList]= useState([]) as any[]; 
+    let length = vehicleList.length;
 
     const initialValues = {
         status : '',
@@ -63,6 +64,13 @@ const QuotationForm: React.FC<Props> = (props) => {
         handleVehicleList(oldVehicleList);
         handleModalState(false);
     }
+
+    useEffect(() => {
+        const old = vehicleList.length;
+        if (old !== vehicleList.length) {
+            length = vehicleList.length; 
+        }
+    }, [vehicleList])
     return (
         <>
             <Formik
@@ -70,7 +78,7 @@ const QuotationForm: React.FC<Props> = (props) => {
                 onSubmit={(initialValues) => props.handleSubmit(initialValues)}
                 validationSchema={formValidation}
             >
-                {({ handleSubmit, setFieldValue, values}) => (
+                {({ handleSubmit, setFieldValue,errors,handleChange, values}) => (
                     <form onSubmit={handleSubmit} className='media-form'>
                         <fieldset className='row'>
                             {props.loading && <div className='form-loading d-flex justify-content-center align-items--center'>
@@ -255,30 +263,39 @@ const QuotationForm: React.FC<Props> = (props) => {
                                 />
                             </div>
                             <div className='col-xs-12 col-sm-12 col-md-12 mt-5'>
-                                <div className='d-flex align-items-center justify-content-space-between'>
-                                    <h2>Vehicle Detail</h2>
-                                    <Button 
-                                        className=''
-                                        disabled={props.loading} 
-                                        btnType='primary'
-                                        onClick={() => handleModalState(true)}
-                                    >
-                                        Add Vehicle
-                                    </Button>
-                                </div>
-                                <div className='form-group col-xs-12 col-sm-6 col-md-12'>
-                                    <Input
-                                        className=''
-                                        type='number'
-                                        name='vehicleList'
-                                        placeholder='vehicleList'
-                                        showLabels
-                                        setFieldValue={setFieldValue}
-                                        value={vehicleList.length}
-                                        // value={}
-                                        config={{ type: 'number', label: '', name: 'vehicleList'}}
-                                    />
-                                    <ErrorMessage name={`mediaContent.vehicleList`} component={FieldErrorMessage} />
+                                <div className='col-xs-12 col-sm-12 col-md-4'>
+
+                                    <div className='d-flex align-items-center justify-content-space-between'>
+                                        <h2>Vehicle Detail</h2>
+                                        <Button 
+                                            className=''
+                                            disabled={props.loading} 
+                                            btnType='primary'
+                                            onClick={() => handleModalState(true)}
+                                        >
+                                            Add Vehicle
+                                        </Button>
+                                    </div>
+                                    <div className='form-group col-xs-12 col-sm-6 col-md-12'>
+                                        {/* <Input
+                                            className=''
+                                            type='number'
+                                            name='vehicleList'
+                                            placeholder='vehicleList'
+                                            showLabels
+                                            setFieldValue={setFieldValue}
+                                            value={vehicleList.length}
+                                            // value={}
+                                            config={{ type: 'number', label: '', name: 'vehicleList'}}
+                                        /> */}
+                                        <Field 
+                                            id="vehicleList" 
+                                            name="vehicleList" 
+                                            placeholder="vehicleList"
+                                        />
+                                            <div className="input-feedback">{errors.vehicleList}</div>
+                                        {/* <ErrorMessage name={`mediaContent.vehicleList`} component={FieldErrorMessage} /> */}
+                                    </div>
                                 </div>
                             </div>
                             {vehicleList.length > 0 &&
