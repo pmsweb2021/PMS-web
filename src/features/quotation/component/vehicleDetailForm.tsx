@@ -3,7 +3,7 @@ import { ErrorMessage, Formik } from 'formik';
 import * as Yup from 'yup';
 import Button from 'shared/components/form/button';
 import FieldErrorMessage from 'shared/components/form/error';
-import { Input, InputDatePicker } from 'shared/components/form/inputTypes';
+import { Input } from 'shared/components/form/inputTypes';
 import Spinner from 'shared/components/spinner/spinner';
 import { errorMessages } from 'shared/constants/messages';
 import Modal from 'shared/components/modal/modal';
@@ -11,8 +11,6 @@ import VehicleList from './vehicleList';
 
 interface Props {
     loading: boolean
-    handleSubmit: (initialValues: any) => void;
-    handelReset: () => void;
     isModalOpen: boolean;
     closeModal: () => void;
     vehicleList: any[];
@@ -30,7 +28,6 @@ const DropDownOptions = [
 const VehicleDetailForm: React.FC<Props> = (props) => {
     const { isModalOpen, closeModal } = props;
     const [actionType, changeActionType] = useState('');
-    console.log(actionType, props.vehicleList, 'actionType');
     
     const initialValues = {
         make: '',

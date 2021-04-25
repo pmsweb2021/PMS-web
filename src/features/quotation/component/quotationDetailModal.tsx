@@ -1,10 +1,12 @@
 import React from 'react';
+import VehicleList from './vehicleList';
 
 interface Props {
     quotationDetail: any;
 }
 
 const quotationDetailModal: React .FC<Props> = (props) => (
+    <>
     <div className='row'>
         <div className='col-xs-12 col-sm-12 col-md-12 col-lg-6'>
             <p>status -  <b>{props.quotationDetail.status}</b></p>
@@ -33,7 +35,13 @@ const quotationDetailModal: React .FC<Props> = (props) => (
             <p> notes:</p>
             <p>{props.quotationDetail.notes}</p>
         </div>
-    </div>    
+    </div> 
+    
+    <h2>Vehicle Detail</h2>
+    <VehicleList
+        vehicleList={props.quotationDetail.vehicleList}
+    />
+    </>
 )
 
 export default quotationDetailModal;
