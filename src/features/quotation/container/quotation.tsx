@@ -22,7 +22,7 @@ interface UIState {
 class PolicyDetail extends Component<RouteComponentProps> {
     state: UIState = {
         loading: false,
-        addQuotation: true,
+        addQuotation: false,
         quotationDetailList: [],
         isModalOpen: false,
         actionType: '',
