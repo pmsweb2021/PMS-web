@@ -265,7 +265,6 @@ const QuotationForm: React.FC<Props> = (props) => {
                             </div>
                             <div className='col-xs-12 col-sm-12 col-md-12 mt-5'>
                                 <div className='col-xs-12 col-sm-12 col-md-4'>
-
                                     <div className='d-flex align-items-center justify-content-space-between'>
                                         <h2>Vehicle Detail</h2>
                                         <Button 
@@ -280,12 +279,12 @@ const QuotationForm: React.FC<Props> = (props) => {
                                     {vehicleList.length === 0 && isError && <p className='error'>Please Add at least one Vehicle.</p>}
                                    
                                 </div>
+                                {vehicleList.length > 0 &&
+                                    <VehicleList
+                                        vehicleList = {vehicleList}
+                                    />
+                                }
                             </div>
-                            {vehicleList.length > 0 &&
-                                <VehicleList
-                                    vehicleList = {vehicleList}
-                                />
-                            }
                             <div className='col-xs-12 col-sm-12 col-md-12 mt-5'>
                                 <Button 
                                     className=''
