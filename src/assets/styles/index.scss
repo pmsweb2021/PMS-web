@@ -41,6 +41,9 @@ form .panel .panel-body{
 // Text-help in form-group
 .form-group{
   position: relative;
+  min-height: 80px;
+	margin-bottom: 5px !important;
+  
   &.float-message{
     margin-bottom: 15px !important;
     span.text-danger{
