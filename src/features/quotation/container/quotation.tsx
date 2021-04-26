@@ -33,11 +33,11 @@ class PolicyDetail extends Component<RouteComponentProps> {
         const { loading, actionType, isModalOpen, addQuotation, quotationDetailList, selectedQuotation } = this.state
         return (
             <>
-                <Header data={firstLevelBreadcrumbs} title={`${addQuotation ? 'View Quotation' : 'Quotation' }`}>
+                <Header data={firstLevelBreadcrumbs} title={`${addQuotation ? 'Generate Quotation' : 'Quotation' }`}>
                 {!addQuotation &&
                         <div className='breadcrumb-btn'>
                             <Button className='mr-2' btnType='primary' onClick={() => this.setState({ addQuotation: true })}>
-                                View Quotation
+                                Generate Quotation
                             </Button>
                         </div>
                     }
@@ -45,7 +45,7 @@ class PolicyDetail extends Component<RouteComponentProps> {
 				<div className='row mt-3'>
 					<div className='col-lg-12'>
 						<div className='ibox float-e-margins'>
-							<TableTitle title={`${addQuotation ? 'View Quotation' : 'Quotation' }`} className='text-capitalize' />
+							<TableTitle title={`${addQuotation ? 'Generate Quotation' : 'Quotation' }`} className='text-capitalize' />
 							<div className='ibox-content'>
                                 {addQuotation &&
                                     <PolicyDetailForm

@@ -22,7 +22,7 @@ const QuotationDetailList: React.FC<Props> = (props) => {
 			</PbHead>
 			<PbBody>
 				{props.loading && <TableSpinner colSpan={5} />}
-				{!props.loading && !props.quotationDetailList.length && <TableEmptyContainer colSpan={5} text={`No Policy content found`} />}
+				{!props.loading && !props.quotationDetailList.length && <TableEmptyContainer colSpan={5} text={`No Quotation content found`} />}
 				{!props.loading && props.quotationDetailList.length > 0 && 
                     props.quotationDetailList.map((company: any, index: number) => {
                         return (

@@ -46,7 +46,7 @@ const VehicleDetailForm: React.FC<Props> = (props) => {
     return (
         <Modal
             show={isModalOpen}
-            modalTitle='Vehicle Detail'
+            modalTitle='Add Vehicle'
             handleClose={closeModal}
             className='vehicle-detail'
         >
@@ -70,7 +70,6 @@ const VehicleDetailForm: React.FC<Props> = (props) => {
                                 <Spinner />
                             </div>}
                             <div className='col-xs-12 col-sm-12 col-md-12'>
-                                <h2 className='mt-0'>Add Vehicle</h2>
 
                                 <div className='form-group col-xs-12 col-sm-6 col-md-3'>
                                     <Input
@@ -142,7 +141,7 @@ const VehicleDetailForm: React.FC<Props> = (props) => {
                                     btnType='primary'
                                     onClick={() => changeActionType('submit')}
                                 >
-                                    Submit Vehicle Detail
+                                    Save
                                 </Button>
                                 <Button
                                     className='ml-10'
@@ -151,7 +150,7 @@ const VehicleDetailForm: React.FC<Props> = (props) => {
                                     btnType='primary'
                                     onClick={() => changeActionType('addNew')}
                                 >
-                                    Add Vehicle Detail
+                                    {`Save & Add more`}
                                 </Button>
                                 
                             </div>
